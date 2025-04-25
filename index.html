@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>in situ Zine Donation Station</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script>
+const chest = document.getElementById('chest-sprite');
+let animating = false;
+
+chest.addEventListener('click', () => {
+  if (animating) return;
+  animating = true;
+  let frame = 0;
+  const totalFrames = 8;
+  const frameWidth = 42;
+  const interval = setInterval(() => {
+    chest.style.backgroundPosition = `-${frame * frameWidth}px 0`;
+    frame++;
+    if (frame === totalFrames) {
+      clearInterval(interval);
+      animating = false;
+      // Optionally: trigger your popup or PayPal button here
+      // document.getElementById('popup').classList.remove('hidden');
+    }
+  }, 80); // 80ms per frame, adjust for speed
+});
+</script>
+
+<body>
+  <div id="container">
+  <div id="chest-sprite" tabindex="0" aria-label="Treasure chest (click to open)"></div>
+</div>
+
+  <div id="popup" class="hidden">
+    <div class="popup-content">
+      <p>Congratulations! You found the treasure!</p>
+      <button id="closeBtn">Close</button>
+    </div>
+  </div>
+  <script>
+const chest = document.getElementById('chest');
+const popup = document.getElementById('popup');
+const closeBtn = document.getElementById('closeBtn');
+const donateButtonContainer = document.getElementById('donate-button-container');
+let paypalScriptLoaded = false;
+
+const closedChest = `
+  __________
+ /\\____;;___\\
+| /         /
+\`. ())oo() .
+ |\\(%()*^^()^\\
+ %| |-%-------|
+ % \\ | %      \\
+ %  \\|%________|
+`;
+const openChest = `
+  __________
+ /\\____;;___\\
+| /  *     /
+\`. (\\  o  /) .
+ |\\(%()*^^()^\\
+ %| |-%-------|
+ % \\ | %  $$$$\\
+ %  \\|%_$$$$__|
+`;
+
+chest.addEventListener('click', () => {
+  chest.textContent = openChest;
+  popup.classList.remove('hidden');
+  // Only load and render PayPal button once
+  if (!paypalScriptLoaded) {
+    const script = document.createElement('script');
+    script.src = "https://www.paypalobjects.com/donate/sdk/donate-sdk.js";
+    script.charset = "UTF-8";
+    script.onload = renderPaypalButton;
+    document.body.appendChild(script);
+    paypalScriptLoaded = true;
+  } else {
+    renderPaypalButton();
+  }
+});
+
+closeBtn.addEventListener('click', () => {
+  popup.classList.add('hidden');
+  chest.textContent = closedChest;
+  // Optionally, clear the donate button to re-render each time
+  // donateButtonContainer.innerHTML = '';
+});
+
+function renderPaypalButton() {
+  // Prevent duplicate rendering
+  if (donateButtonContainer.innerHTML.trim() !== "") return;
+  PayPal.Donation.Button({
+    env: 'production',
+    hosted_button_id: '4M66NDX6XSLE8',
+    image: {
+      src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif',
+      alt: 'Donate with PayPal button',
+      title: 'PayPal - The safer, easier way to pay online!',
+    }
+  }).render('#donate-button-container');
+}
+</script>
+
+</body>
+</html>
