@@ -1,7 +1,11 @@
 body {
 
   body {
-    background: #281d19;
+    background: #281d19  url('/Users/oceaneboulais/Documents/GitHub/insitu/scratchMe.jpg') center center no-repeat;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -30,13 +34,7 @@ body {
     z-index: 2;
   }
   
-  /* background: #281d19 url('/Users/oceaneboulais/Documents/GitHub/insitu/scratchMe.jpg') center center no-repeat;
-  background-size: cover;
-  margin: 0;
-  min-height: 100vh;
-  overflow: hidden; */
-}
-
+ 
 #eraser-canvas {
   position: fixed;
   top: 0; left: 0;
