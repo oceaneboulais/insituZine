@@ -7,45 +7,52 @@
 </head>
 <body>
 
-
-  <div id="scratch-container">
-    <img id="revealed-image" src="/Users/oceaneboulais/Documents/GitHub/insitu/scratchMe.jpg" alt="Revealed" />
-    <canvas id="scratch-canvas"></canvas>
+<div id="main-flex">
+  <div id="text-box" >
+    paint, if you dare...
   </div>
-
   <!-- <div id="scratch-container">
-    <img id="revealed-image" src="/Users/oceaneboulais/Documents/GitHub/insitu/Bleaching.png" alt="Revealed" />
+    <img id="revealed-image" src="scratchMe.jpg" alt="Revealed" />
     <canvas id="scratch-canvas"></canvas>
   </div> -->
-
-  <canvas id="eraser-canvas"></canvas>
-  <div id="container">
-    <img id="chest" src="/Users/oceaneboulais/Documents/GitHub/insitu/chest_closed.png" alt="argh me tweasure" tabindex="0" style="width:400px;" />
+  <div id="scratch-container">
+    <img id="revealed-image" src="Bleaching.png" alt="Revealed" />
+    <canvas id="scratch-canvas"></canvas>
   </div>
+
+
+<div id="main-flex">
+  <div id="text-box" >
+    ...or unlock to restock
+  </div>
+
+  <div id="container">
+    <img id="chest" src="chest_closed.png" alt="argh me tweasure" tabindex="0" />
+  </div>
+
 
   <div id="popup" class="hidden">
     <div class="popup-content">
       <p>Arghh ye found the communal treasure... </p>
-      <a href="https://www.paypal.com/ncp/payment/AFTHCVR8C37XC" target="_blank" id="donate-link">Donation Station
-      </a>
-
+      <a href="https://www.paypal.com/ncp/payment/AFTHCVR8C37XC" target="_blank" id="donate-link">Donation Station</a>
     </div>
   </div>
 
-  <!-- magic erasure javascript -->
+  <!-- Scratch-off JavaScript -->
   <script>
     const canvas = document.getElementById('scratch-canvas');
     const ctx = canvas.getContext('2d');
     const container = document.getElementById('scratch-container');
-    canvas.width = container.offsetWidth;
-    canvas.height = container.offsetHeight;
-    
-    // Fill canvas with solid color (brown)
-    ctx.fillStyle = '#281d19';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
+    function resizeCanvas() {
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+      ctx.fillStyle = '#281d19';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('load', resizeCanvas);
+
     let isDrawing = false;
-    
     function getPosition(e) {
       const rect = canvas.getBoundingClientRect();
       return {
@@ -53,84 +60,25 @@
         y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top
       };
     }
-    
     function erase(e) {
       if (!isDrawing) return;
       e.preventDefault();
       const { x, y } = getPosition(e);
       ctx.globalCompositeOperation = 'destination-out';
       ctx.beginPath();
-      ctx.arc(x, y, 25, 0, 2 * Math.PI);
+      ctx.arc(x, y, 50, 0, 2 * Math.PI);
       ctx.fill();
       ctx.globalCompositeOperation = 'source-over';
     }
-    
     canvas.addEventListener('mousedown', e => { isDrawing = true; erase(e); });
     canvas.addEventListener('mousemove', erase);
     window.addEventListener('mouseup', () => { isDrawing = false; });
-    
     canvas.addEventListener('touchstart', e => { isDrawing = true; erase(e); });
     canvas.addEventListener('touchmove', erase);
     window.addEventListener('touchend', () => { isDrawing = false; });
-    </script>
-    
-  <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const canvas = document.getElementById('eraser-canvas');
-      const ctx = canvas.getContext('2d');
-      // Set canvas size to window size
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    
-      // Fill with solid color (or use a pattern/image)
-      ctx.fillStyle = '#281d19'; // solid color to erase
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-      let erasing = false;
-    
-      function erase(x, y) {
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.beginPath();
-        ctx.arc(x, y, 30, 0, 2 * Math.PI); // 30px eraser
-        ctx.fill();
-        ctx.globalCompositeOperation = 'source-over';
-      }
-    
-      canvas.addEventListener('mousedown', e => {
-        erasing = true;
-        erase(e.clientX, e.clientY);
-      });
-    
-      canvas.addEventListener('mousemove', e => {
-        if (erasing) erase(e.clientX, e.clientY);
-      });
-    
-      window.addEventListener('mouseup', () => {
-        erasing = false;
-      });
-    
-      // Optional: make canvas responsive
-      window.addEventListener('resize', () => {
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        ctx.putImageData(imageData, 0, 0);
-      });
-    });
-    </script>
-    
-    <script>
-      chest.addEventListener('click', () => {
-      if (opened) return;
-      opened = true;
-      chest.src = 'chest.gif'; // play animation
-      setTimeout(() => {
-        chest.src = '/Users/oceaneboulais/Documents/GitHub/insitu/chest_open.png'; // show open chest PNG
-        popup.classList.remove('hidden');
-      }, 1000); // adjust 1000ms to your GIF's duration
-    });
-    </script>
+  </script>
 
+  <!-- Chest and Popup Logic -->
   <script>
     const chest = document.getElementById('chest');
     const popup = document.getElementById('popup');
@@ -139,10 +87,11 @@
     chest.addEventListener('click', () => {
       if (opened) return;
       opened = true;
-      chest.src = 'chest.gif'; // swap to animated GIF on click
+      chest.src = 'chest.gif'; // play animation
       setTimeout(() => {
+        chest.src = 'chest_open.png'; // show open chest PNG
         popup.classList.remove('hidden');
-      }, 500); // adjust for your GIF's duration
+      }, 1000); // adjust 1000ms to your GIF's duration
     });
 
     popup.addEventListener('click', () => {
@@ -151,5 +100,4 @@
   </script>
 
 </body>
-
 </html>
