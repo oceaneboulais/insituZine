@@ -2,108 +2,89 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>in situ Zine Donation Station</title>
+  <title>SIO Zine Chest Donation</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<script>
-const chest = document.getElementById('chest-sprite');
-let animating = false;
-
-chest.addEventListener('click', () => {
-  if (animating) return;
-  animating = true;
-  let frame = 0;
-  const totalFrames = 8;
-  const frameWidth = 42;
-  const interval = setInterval(() => {
-    chest.style.backgroundPosition = `-${frame * frameWidth}px 0`;
-    frame++;
-    if (frame === totalFrames) {
-      clearInterval(interval);
-      animating = false;
-      // Optionally: trigger your popup or PayPal button here
-      // document.getElementById('popup').classList.remove('hidden');
-    }
-  }, 80); // 80ms per frame, adjust for speed
-});
-</script>
-
 <body>
+
+  <canvas id="eraser-canvas"></canvas>
   <div id="container">
-  <div id="chest-sprite" tabindex="0" aria-label="Treasure chest (click to open)"></div>
-</div>
+    <img id="chest" src="chest_closed.png" alt="argh me tweasure" tabindex="0" style="width:300px;" />
+  </div>
 
   <div id="popup" class="hidden">
     <div class="popup-content">
-      <p>Congratulations! You found the treasure!</p>
-      <button id="closeBtn">Close</button>
+      <p>Click me to contribute to the SIO zine chest!</p>
+      <a href="https://www.paypal.com/ncp/payment/AFTHCVR8C37XC" target="_blank" id="donate-link">Donation Station
+      </a>
+
     </div>
   </div>
+
   <script>
-const chest = document.getElementById('chest');
-const popup = document.getElementById('popup');
-const closeBtn = document.getElementById('closeBtn');
-const donateButtonContainer = document.getElementById('donate-button-container');
-let paypalScriptLoaded = false;
+    window.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('eraser-canvas');
+      const ctx = canvas.getContext('2d');
+      // Set canvas size to window size
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    
+      // Fill with solid color (or use a pattern/image)
+      ctx.fillStyle = '#281d19'; // solid color to erase
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+      let erasing = false;
+    
+      function erase(x, y) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, 2 * Math.PI); // 30px eraser
+        ctx.fill();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    
+      canvas.addEventListener('mousedown', e => {
+        erasing = true;
+        erase(e.clientX, e.clientY);
+      });
+    
+      canvas.addEventListener('mousemove', e => {
+        if (erasing) erase(e.clientX, e.clientY);
+      });
+    
+      window.addEventListener('mouseup', () => {
+        erasing = false;
+      });
+    
+      // Optional: make canvas responsive
+      window.addEventListener('resize', () => {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx.putImageData(imageData, 0, 0);
+      });
+    });
+    </script>
+    
 
-const closedChest = `
-  __________
- /\\____;;___\\
-| /         /
-\`. ())oo() .
- |\\(%()*^^()^\\
- %| |-%-------|
- % \\ | %      \\
- %  \\|%________|
-`;
-const openChest = `
-  __________
- /\\____;;___\\
-| /  *     /
-\`. (\\  o  /) .
- |\\(%()*^^()^\\
- %| |-%-------|
- % \\ | %  $$$$\\
- %  \\|%_$$$$__|
-`;
+  <script>
+    const chest = document.getElementById('chest');
+    const popup = document.getElementById('popup');
+    let opened = false;
 
-chest.addEventListener('click', () => {
-  chest.textContent = openChest;
-  popup.classList.remove('hidden');
-  // Only load and render PayPal button once
-  if (!paypalScriptLoaded) {
-    const script = document.createElement('script');
-    script.src = "https://www.paypalobjects.com/donate/sdk/donate-sdk.js";
-    script.charset = "UTF-8";
-    script.onload = renderPaypalButton;
-    document.body.appendChild(script);
-    paypalScriptLoaded = true;
-  } else {
-    renderPaypalButton();
-  }
-});
+    chest.addEventListener('click', () => {
+      if (opened) return;
+      opened = true;
+      chest.src = 'chest.gif'; // swap to animated GIF on click
+      setTimeout(() => {
+        popup.classList.remove('hidden');
+      }, 1000); // adjust for your GIF's duration
+    });
 
-closeBtn.addEventListener('click', () => {
-  popup.classList.add('hidden');
-  chest.textContent = closedChest;
-  // Optionally, clear the donate button to re-render each time
-  // donateButtonContainer.innerHTML = '';
-});
-
-function renderPaypalButton() {
-  // Prevent duplicate rendering
-  if (donateButtonContainer.innerHTML.trim() !== "") return;
-  PayPal.Donation.Button({
-    env: 'production',
-    hosted_button_id: '4M66NDX6XSLE8',
-    image: {
-      src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif',
-      alt: 'Donate with PayPal button',
-      title: 'PayPal - The safer, easier way to pay online!',
-    }
-  }).render('#donate-button-container');
-}
-</script>
-
+    popup.addEventListener('click', () => {
+      popup.classList.add('hidden');
+    });
+  </script>
 </body>
+
 </html>
