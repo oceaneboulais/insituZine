@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SIO Zine Chest Donation</title>
+  <title>the in situ ~ donation station</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,12 +14,12 @@
 
   <canvas id="eraser-canvas"></canvas>
   <div id="container">
-    <img id="chest" src="chest_closed.png" alt="argh me tweasure" tabindex="0" style="width:300px;" />
+    <img id="chest" src="chest_closed.png" alt="argh me tweasure" tabindex="0" style="width:400px;" />
   </div>
 
   <div id="popup" class="hidden">
     <div class="popup-content">
-      <p>Arghh ye found communal treasure... </p>
+      <p>Arghh ye found the communal treasure... </p>
       <a href="https://www.paypal.com/ncp/payment/AFTHCVR8C37XC" target="_blank" id="donate-link">Donation Station
       </a>
 
@@ -113,6 +113,17 @@
     });
     </script>
     
+    <script>
+      chest.addEventListener('click', () => {
+      if (opened) return;
+      opened = true;
+      chest.src = 'chest.gif'; // play animation
+      setTimeout(() => {
+        chest.src = '/Users/oceaneboulais/Documents/GitHub/insitu/chest_open.png'; // show open chest PNG
+        popup.classList.remove('hidden');
+      }, 1000); // adjust 1000ms to your GIF's duration
+    });
+    </script>
 
   <script>
     const chest = document.getElementById('chest');
@@ -125,7 +136,7 @@
       chest.src = 'chest.gif'; // swap to animated GIF on click
       setTimeout(() => {
         popup.classList.remove('hidden');
-      }, 1000); // adjust for your GIF's duration
+      }, 500); // adjust for your GIF's duration
     });
 
     popup.addEventListener('click', () => {
