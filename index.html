@@ -7,6 +7,11 @@
 </head>
 <body>
 
+  <div id="scratch-container">
+    <img id="revealed-image" src="/Users/oceaneboulais/Documents/GitHub/insitu/Bleaching.png" alt="Revealed" />
+    <canvas id="scratch-canvas"></canvas>
+  </div>
+
   <canvas id="eraser-canvas"></canvas>
   <div id="container">
     <img id="chest" src="chest_closed.png" alt="argh me tweasure" tabindex="0" style="width:300px;" />
@@ -14,13 +19,55 @@
 
   <div id="popup" class="hidden">
     <div class="popup-content">
-      <p>Click me to contribute to the SIO zine chest!</p>
+      <p>Arghh ye found communal treasure... </p>
       <a href="https://www.paypal.com/ncp/payment/AFTHCVR8C37XC" target="_blank" id="donate-link">Donation Station
       </a>
 
     </div>
   </div>
 
+  <!-- magic erasure javascript -->
+  <script>
+    const canvas = document.getElementById('scratch-canvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('scratch-container');
+    canvas.width = container.offsetWidth;
+    canvas.height = container.offsetHeight;
+    
+    // Fill canvas with solid color (brown)
+    ctx.fillStyle = '#281d19';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    let isDrawing = false;
+    
+    function getPosition(e) {
+      const rect = canvas.getBoundingClientRect();
+      return {
+        x: (e.touches ? e.touches[0].clientX : e.clientX) - rect.left,
+        y: (e.touches ? e.touches[0].clientY : e.clientY) - rect.top
+      };
+    }
+    
+    function erase(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const { x, y } = getPosition(e);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 25, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+    
+    canvas.addEventListener('mousedown', e => { isDrawing = true; erase(e); });
+    canvas.addEventListener('mousemove', erase);
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+    
+    canvas.addEventListener('touchstart', e => { isDrawing = true; erase(e); });
+    canvas.addEventListener('touchmove', erase);
+    window.addEventListener('touchend', () => { isDrawing = false; });
+    </script>
+    
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       const canvas = document.getElementById('eraser-canvas');
@@ -85,6 +132,7 @@
       popup.classList.add('hidden');
     });
   </script>
+
 </body>
 
 </html>
