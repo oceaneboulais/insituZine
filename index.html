@@ -24,7 +24,7 @@
 
 <div id="main-flex">
   <div id="text-box" >
-    ...and unlock to restock
+    ...and unlock to support the zine stock
   </div>
 
   <div id="container">
@@ -90,13 +90,20 @@
     let opened = false;
 
     chest.addEventListener('click', () => {
-      if (opened) return;
-      opened = true;
-      chest.src = 'chest.gif'; // play animation
-      setTimeout(() => {
-        chest.src = 'chest_open.png'; // show open chest PNG
-        popup.classList.remove('hidden');
-      }, 1000); // adjust 1000ms to your GIF's duration
+      if (opened) {
+        // Close the chest
+        chest.src = 'chest_closed.png'; // Reset to closed chest image
+        popup.classList.add('hidden'); // Hide the popup
+        opened = false;
+      } else {
+        // Open the chest
+        opened = true;
+        chest.src = 'chest.gif'; // Play animation
+        setTimeout(() => {
+          chest.src = 'chest_open.png'; // Show open chest PNG
+          popup.classList.remove('hidden'); // Show the popup
+        }, 1000); // Adjust 1000ms to your GIF's duration
+      }
     });
 
     popup.addEventListener('click', () => {
