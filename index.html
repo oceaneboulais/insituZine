@@ -114,6 +114,20 @@
     /* Ensure Learn More buttons are on top and clickable */
     .learn-more-btn { position:relative; z-index:2; pointer-events:auto; }
     .pdf-viewer object, .pdf-viewer iframe { border: none; border-radius:6px; box-shadow:0 10px 30px rgba(0,0,0,0.4); }
+    /* Footer minimal styling */
+    .footer-info { color:#9aa0a6; font-weight:300; font-size:0.95rem; text-align:center; margin-top:0.25rem; }
+    .footer-info a { color: inherit; text-decoration: none; margin-left:0.25rem; opacity:0.95; }
+    /* Mobile adjustments for zine scrolly and modal */
+    @media (max-width: 700px) {
+      .v01-zine-section .zine-header p { padding: 0 1rem; }
+      .scrolly-container { padding: 0.5rem 0.5rem 2rem; max-width:100%; }
+      .zine-page { margin: 0.75rem 0; min-height: auto; }
+      .page-image { max-width: 100%; max-height: calc(100vh - 140px); border-radius:4px; }
+      .zine-modal-inner { width: 100vw; height: 100vh; padding: 12px; box-sizing: border-box; }
+      .zine-modal { align-items: flex-start; padding-top: 12px; }
+      .zine-modal .modal-image { max-height: calc(100vh - 88px); width: 100%; height: auto; border-radius:6px; }
+      .zine-modal .close-modal { top: 12px; right: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -196,7 +210,7 @@
             <img src="team/headshots/oceane_profile.png" alt="Oc Boulais">
           </div>
           <h3 class="member-name">Océane Boulais</h3>
-          <p class="role">Digizine Editor</p>
+          <p class="role">Digizine and Design Co-Editor</p>
           <button type="button" class="learn-more-btn" aria-expanded="false">Learn More</button>
           <div class="member-details" hidden>
             <small class="pronouns">they/she</small>
@@ -290,7 +304,7 @@
                 <img src="team/headshots/sarah_profile.png" alt="Sarah Rose">
               </div>
               <h3 class="member-name">Sarah Rose</h3>
-              <p class="role">Co-Designer / Co-Editor</p>
+              <p class="role">Design Co-Editor</p>
               <button type="button" class="learn-more-btn" aria-expanded="false">Learn More</button>
               <div class="member-details" hidden>
                 <small class="pronouns">she/her</small>
@@ -471,7 +485,7 @@
       <a href="#connect">Connect</a>
     </div>
       <div class="footer-info">
-        Website vibe coded at Scripps Institution of Oceanography with 💜<a href="https://www.instagram.com/byoceaneboulais/" target="_blank" rel="noopener">@byoceaneboulais</a>
+        This site was vibe coded at <a href="https://scripps.ucsd.edu/" target="_blank" rel="noopener">Scripps Institution of Oceanography</a> with 💜<a href="https://www.instagram.com/byoceaneboulais/" target="_blank" rel="noopener">@byoceaneboulais</a>
       </div>
     <div class="footer-logo">
       <a href="https://scripps.ucsd.edu/" target="_blank">
@@ -624,11 +638,16 @@
         }
         function hideModal() { if (!modal) return; modal.setAttribute('hidden', ''); if (modalImg) modalImg.src = ''; modal.setAttribute('aria-hidden', 'true'); modalIndex = -1; }
         if (modal && modalImg) {
+          // helpers to lock/unlock background scroll when modal is open
+          const lockBodyScroll = () => { document.body.style.overflow = 'hidden'; };
+          const unlockBodyScroll = () => { document.body.style.overflow = ''; };
+
           document.querySelectorAll('.page-image').forEach((img, i) => {
             img.style.cursor = 'zoom-in';
             img.addEventListener('click', (e) => {
               e.stopPropagation();
               openModalAtIndex(i);
+              lockBodyScroll();
             });
           });
           if (closeBtn) closeBtn.addEventListener('click', hideModal);
@@ -643,6 +662,46 @@
               if (modalIndex < ZINE_PAGE_URLS.length - 1) { modalIndex += 1; modalImg.src = ZINE_PAGE_URLS[modalIndex]; }
             }
           });
+          // Improve mobile behavior: lock background scroll when modal open (lock/unlock defined above)
+          // Touch / swipe support for modal navigation
+          let touchStartX = 0, touchStartY = 0, touchMoved = false;
+          modal.addEventListener('touchstart', function(e) {
+            if (!e.touches || e.touches.length > 1) return; // ignore multi-touch
+            touchMoved = false;
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+          }, { passive: true });
+          modal.addEventListener('touchmove', function(e) {
+            touchMoved = true;
+          }, { passive: true });
+          modal.addEventListener('touchend', function(e) {
+            if (!touchMoved) return;
+            const touch = e.changedTouches && e.changedTouches[0];
+            if (!touch) return;
+            const dx = touch.clientX - touchStartX;
+            const dy = touch.clientY - touchStartY;
+            const absDx = Math.abs(dx), absDy = Math.abs(dy);
+            const SWIPE_X_THRESHOLD = 40;
+            const SWIPE_Y_THRESHOLD = 80;
+            // horizontal swipe for navigation
+            if (absDx > SWIPE_X_THRESHOLD && absDx > absDy) {
+              if (dx < 0 && modalIndex < ZINE_PAGE_URLS.length - 1) {
+                modalIndex += 1; if (modalImg) modalImg.src = ZINE_PAGE_URLS[modalIndex];
+              } else if (dx > 0 && modalIndex > 0) {
+                modalIndex -= 1; if (modalImg) modalImg.src = ZINE_PAGE_URLS[modalIndex];
+              }
+            }
+            // swipe down to close
+            if (dy > SWIPE_Y_THRESHOLD && absDy > absDx) {
+              hideModal();
+            }
+          }, { passive: true });
+          // ensure body scroll is unlocked when hiding modal
+          const originalHideModal = hideModal;
+          window.hideModal = function() { originalHideModal(); unlockBodyScroll(); };
+          // wrap existing close button/hide events
+          if (closeBtn) closeBtn.addEventListener('click', () => { hideModal(); unlockBodyScroll(); });
+          modal.addEventListener('click', (e) => { if (e.target === modal) { hideModal(); unlockBodyScroll(); } });
         }
       }
       // Team toggles
