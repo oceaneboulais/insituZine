@@ -24,8 +24,8 @@
     .team-member.open .learn-more-btn { text-decoration: underline; }
     .pronouns { font-size:0.9rem; color:#666; margin:0.25rem 0 0 0; display:inline-block; }
     /* Hero / Home background and centered text */
-    .hero-section { position:relative; background-image: url('team/headshots/old_sio_view.png'); background-size: cover; background-position: center center; background-repeat: no-repeat; color: #fff; }
-    .hero-section::before { content: ""; position:absolute; inset:0; background: rgba(0,0,0,0.42); z-index:0; }
+    .hero-section { position:relative; background-image: url('spread_proof_cover.jpg'); background-size: cover; background-position: center center; background-repeat: no-repeat; color: #fff; }
+    .hero-section::before { content: ""; position:absolute; inset:0; background: rgba(0,0,0,0.55); z-index:0; }
     .hero-section .hero-content { position:relative; z-index:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:60vh; padding:4rem 1rem; }
     .hero-section .hero-title, .hero-section .hero-subtitle, .hero-section .btn-hero { color: #fff; }
     .hero-section .btn-hero { margin-top:1rem; }
@@ -128,6 +128,31 @@
       .zine-modal .modal-image { max-height: calc(100vh - 88px); width: 100%; height: auto; border-radius:6px; }
       .zine-modal .close-modal { top: 12px; right: 12px; }
     }
+
+    /* v02 coming soon section */
+    .v02-zine-section { padding: 5rem 0; background: #f5f5f0; }
+    .coming-soon-block { max-width: 680px; margin: 2rem auto 0; text-align: center; }
+    .coming-soon-badge { display: inline-block; background: #1a1a1a; color: #fff; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 2rem; margin-bottom: 1.25rem; }
+    .coming-soon-text { font-size: 1.05rem; line-height: 1.7; color: #444; }
+
+    /* Artwork table section */
+    .artwork-section { padding: 5rem 0; background: #fff; }
+    .artwork-intro { max-width: 740px; margin: 0 auto 2rem; text-align: center; color: #555; font-size: 1rem; line-height: 1.7; }
+    .artwork-table-wrapper { overflow-x: auto; }
+    .artwork-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    .artwork-table thead { background: #1a1a1a; color: #fff; }
+    .artwork-table th { padding: 0.75rem 1rem; text-align: left; font-weight: 600; letter-spacing: 0.04em; font-size: 0.85rem; text-transform: uppercase; }
+    .artwork-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+    .artwork-table tbody tr:nth-child(even) { background: #f9f9f7; }
+    .artwork-table tbody tr:hover { background: #f0ece6; }
+    .artwork-table td:first-child { font-weight: 600; color: #1a1a1a; }
+    .artwork-table td:nth-child(2) { color: #555; white-space: nowrap; }
+    .artwork-table td:nth-child(3) { color: #666; font-size: 0.9rem; }
+    .artwork-loading { text-align: center; color: #888; padding: 2rem; font-size: 0.95rem; }
+    .artwork-error { text-align: center; color: #c0392b; padding: 1.5rem; font-size: 0.9rem; background: #fdf0ed; border-radius: 6px; }
+    @media (max-width: 700px) {
+      .artwork-table th, .artwork-table td { padding: 0.6rem 0.6rem; font-size: 0.85rem; }
+    }
   </style>
 </head>
 <body>
@@ -149,7 +174,8 @@
           <li><a href="#submit" class="nav-link">Submit</a></li>
           <li><a href="#support" class="nav-link">Support</a></li>
           <li><a href="#v01-zine" class="nav-link">v01 Zine</a></li>
-          <!-- <li><a href="#art-show" class="nav-link">Art Show</a></li> -->
+          <li><a href="#v02-zine" class="nav-link">v02 Zine</a></li>
+          <li><a href="#artwork" class="nav-link">Artwork</a></li>
           <li><a href="#connect" class="nav-link">Connect</a></li>
         </ul>
       </nav>
@@ -159,8 +185,8 @@
     <section id="home" class="hero-section">
     <div class="hero-content">
       <h1 class="hero-title">Countercurrents</h1>
-      <p class="hero-subtitle">v02 Issue · Now Accepting Submissions</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScD13m0tAnMkMp-vkZcb0RxmF-pnxioS5UAQHWTt43-KD4Mrg/viewform?usp=send_form" target="_blank" class="btn btn-hero">Open to Submissions Until March 1</a>
+      <p class="hero-subtitle">v02 Issue · Coming Soon — June 2026</p>
+      <a href="#v02-zine" class="btn btn-hero">Coming Soon This June 2026</a>
     </div>
   </section>
 
@@ -369,13 +395,12 @@
       <section id="submit" class="submit-section">
         <div class="container">
           <h2 class="section-title">Submit</h2>
-          <p class="section-subtitle">We're accepting submissions — add your work here.</p>
+          <p class="section-subtitle">Submissions for v02 are now closed. Stay tuned for v03!</p>
           <div class="submission-theme" style="margin-top:1rem;">
             <h3 class="theme-title" style="margin:0 0 0.25rem 0;font-size:1.05rem;">Theme: Countercurrents</h3>
             <p class="theme-subtext" style="margin:0;max-width:800px;">Countercurrents welcomes work that explores forging unexpected paths, resilience in adversity, and surprising discoveries — experimental or traditional. All community art and writing are encouraged.</p>
           </div>
-          <p style="margin-top:1rem;"><a href="https://docs.google.com/forms/d/e/1FAIpQLScD13m0tAnMkMp-vkZcb0RxmF-pnxioS5UAQHWTt43-KD4Mrg/viewform?usp=send_form" target="_blank" rel="noopener" class="btn btn-hero">Open to Submissions Until March 1st</a></p>
-          <p style="margin-top:0.5rem;"><a href="#" id="sticker-call-link" target="_blank" rel="noopener" class="btn btn-hero">Call for Sticker Designs (Coming in summer 2026)</a></p>
+          <p style="margin-top:1rem;"><a href="#" id="sticker-call-link" rel="noopener" class="btn btn-hero">Call for Sticker Designs (Coming Summer 2026)</a></p>
         </div>
       </section>
 
@@ -446,6 +471,41 @@
           </div>
         </div>
 
+      <!-- v02 Zine Section - Coming Soon -->
+      <section id="v02-zine" class="v02-zine-section">
+        <div class="container">
+          <h2 class="section-title">v02 Zine</h2>
+          <p class="section-subtitle">Countercurrents · Coming June 2026</p>
+          <div class="coming-soon-block">
+            <div class="coming-soon-badge">Coming Soon</div>
+            <p class="coming-soon-text">Our second issue, <em>Countercurrents</em>, is in final production and will be released <strong>June 2026</strong>. It explores forging unexpected paths, resilience in adversity, and surprising discoveries from the SIO community. Check back here soon to read, explore, and download the full zine.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Artwork Table Section -->
+      <section id="artwork" class="artwork-section">
+        <div class="container">
+          <h2 class="section-title">Artwork</h2>
+          <p class="section-subtitle">All works featured across in situ issues</p>
+          <p class="artwork-intro">Below is a curated index of every artwork that has been submitted and accepted into in situ — including title, contributing artist, and a short description of the piece.</p>
+          <div class="artwork-table-wrapper">
+            <div id="artwork-loading" class="artwork-loading">Loading artwork index&hellip;</div>
+            <div id="artwork-error" class="artwork-error" hidden></div>
+            <table id="artwork-table" class="artwork-table" hidden>
+              <thead>
+                <tr>
+                  <th scope="col">Title</th>
+                  <th scope="col">Artist</th>
+                  <th scope="col">Description</th>
+                </tr>
+              </thead>
+              <tbody id="artwork-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
       <section id="connect" class="connect-section">
         <div class="container">
           <h2 class="connect-title">Connect</h2>
@@ -482,6 +542,10 @@
       <a href="#support">Support</a>
       <span>/</span>
       <a href="#v01-zine">v01 Zine</a>
+      <span>/</span>
+      <a href="#v02-zine">v02 Zine</a>
+      <span>/</span>
+      <a href="#artwork">Artwork</a>
       <span>/</span>
       <a href="#connect">Connect</a>
     </div>
@@ -746,6 +810,80 @@
         });
       });
       // No member is opened by default
+
+      // ── Artwork table: fetch from published Google Sheet CSV ──────────────
+      // Columns used (0-indexed): C=2 (Title), H=7 (Artist), I=8 (Description)
+      // To enable: File > Share > Publish to web > CSV in Google Sheets, then
+      // replace SHEET_CSV_URL with the published CSV link below.
+      const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1ArCUo0L3y80MUPwkziSrgeOVDxJd_2mWBTufzi1jY_o/export?format=csv&gid=0';
+
+      function parseCSV(text) {
+        // Minimal RFC-4180 CSV parser (handles quoted fields with commas/newlines)
+        const rows = [];
+        let row = [], field = '', inQuotes = false;
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i], next = text[i + 1];
+          if (inQuotes) {
+            if (ch === '"' && next === '"') { field += '"'; i++; }
+            else if (ch === '"') { inQuotes = false; }
+            else { field += ch; }
+          } else {
+            if (ch === '"') { inQuotes = true; }
+            else if (ch === ',') { row.push(field); field = ''; }
+            else if (ch === '\r' && next === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; }
+            else if (ch === '\n' || ch === '\r') { row.push(field); rows.push(row); row = []; field = ''; }
+            else { field += ch; }
+          }
+        }
+        if (field || row.length) { row.push(field); rows.push(row); }
+        return rows;
+      }
+
+      function renderArtworkTable(rows) {
+        const tbody = document.getElementById('artwork-tbody');
+        const table = document.getElementById('artwork-table');
+        const loading = document.getElementById('artwork-loading');
+        const errEl = document.getElementById('artwork-error');
+        if (!tbody || !table || !loading) return;
+
+        // Skip header row (row 0); columns: C=2, H=7, I=8
+        const dataRows = rows.slice(1).filter(r => r[2] && r[2].trim());
+        if (dataRows.length === 0) {
+          loading.hidden = true;
+          errEl.textContent = 'No artwork entries found yet — check back soon!';
+          errEl.hidden = false;
+          return;
+        }
+        dataRows.forEach(r => {
+          const tr = document.createElement('tr');
+          [2, 7, 8].forEach(ci => {
+            const td = document.createElement('td');
+            td.textContent = (r[ci] || '').trim();
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+        loading.hidden = true;
+        table.hidden = false;
+      }
+
+      (function loadArtwork() {
+        const errEl = document.getElementById('artwork-error');
+        const loading = document.getElementById('artwork-loading');
+        fetch(SHEET_CSV_URL)
+          .then(res => {
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            return res.text();
+          })
+          .then(text => renderArtworkTable(parseCSV(text)))
+          .catch(() => {
+            if (loading) loading.hidden = true;
+            if (errEl) {
+              errEl.textContent = 'Artwork index is not yet available \u2014 the Google Sheet needs to be published publicly. Once published, this table will populate automatically.';
+              errEl.hidden = false;
+            }
+          });
+      })();
     });
   </script>
 
