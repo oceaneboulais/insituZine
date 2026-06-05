@@ -131,6 +131,7 @@
 
     /* v02 zine section — treasure chest */
     .v02-zine-section { padding: 5rem 0; background: #f5f5f0; }
+    .v02-coming-soon { text-align: center; font-size: 1.4rem; color: #888; letter-spacing: 0.06em; margin-top: 2rem; }
     .treasure-chest-block { max-width: 680px; margin: 2rem auto 0; text-align: center; }
     .chest-img { width: 220px; cursor: pointer; transition: transform 180ms ease; display: block; margin: 0 auto; image-rendering: pixelated; }
     .chest-img:hover { transform: scale(1.06); }
@@ -150,6 +151,12 @@
     /* Artwork table section */
     .artwork-section { padding: 5rem 0; background: #fff; }
     .artwork-intro { max-width: 740px; margin: 0 auto 2rem; text-align: center; color: #555; font-size: 1rem; line-height: 1.7; }
+    .artwork-tab-nav { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 2px solid #e8e8e8; }
+    .artwork-tab-btn { background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -2px; padding: 0.55rem 1.6rem; font-size: 0.85rem; font-weight: 600; cursor: pointer; color: #aaa; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.15s, border-color 0.15s; }
+    .artwork-tab-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; }
+    .artwork-tab-btn:hover { color: #1a1a1a; }
+    .artwork-tab-panel { display: none; }
+    .artwork-tab-panel.active { display: block; }
     .artwork-table-wrapper { overflow-x: auto; }
     .artwork-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
     .artwork-table thead { background: #1a1a1a; color: #fff; }
@@ -157,13 +164,11 @@
     .artwork-table td { padding: 0.75rem 1rem; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
     .artwork-table tbody tr:nth-child(even) { background: #f9f9f7; }
     .artwork-table tbody tr:hover { background: #f0ece6; }
-    .artwork-table td:first-child { font-weight: 600; color: #1a1a1a; }
-    .artwork-table td:nth-child(2) { color: #555; white-space: nowrap; }
-    .artwork-table td:nth-child(3) { color: #666; font-size: 0.9rem; }
-    .artwork-loading { text-align: center; color: #888; padding: 2rem; font-size: 0.95rem; }
-    .artwork-error { text-align: center; color: #c0392b; padding: 1.5rem; font-size: 0.9rem; background: #fdf0ed; border-radius: 6px; }
+    .artwork-table td:first-child { color: #666; font-size: 0.88rem; }
+    .artwork-table td:nth-child(2) { font-weight: 600; color: #1a1a1a; }
+    .artwork-table td:nth-child(3) { color: #777; font-size: 0.88rem; }
     @media (max-width: 700px) {
-      .artwork-table th, .artwork-table td { padding: 0.6rem 0.6rem; font-size: 0.85rem; }
+      .artwork-table th, .artwork-table td { padding: 0.6rem 0.6rem; font-size: 0.84rem; }
     }
   </style>
 </head>
@@ -477,6 +482,7 @@
         <div class="container">
           <h2 class="section-title">v02 Zine</h2>
           <p class="section-subtitle">Countercurrents · June 2026</p>
+          <!--
           <div class="treasure-chest-block">
             <img id="chest-img" class="chest-img" src="old_insituZine/chest_closed.png" alt="Treasure chest — click to unlock the zine">
             <p class="chest-prompt">The zine is locked inside! Enter the secret password to open the chest.</p>
@@ -493,6 +499,8 @@
               </div>
             </div>
           </div>
+          -->
+          <p class="v02-coming-soon">Coming Soon!</p>
         </div>
       </section>
 
@@ -502,19 +510,227 @@
           <h2 class="section-title">Artwork</h2>
           <p class="section-subtitle">All works featured across in situ issues</p>
           <p class="artwork-intro">Below is a curated index of every artwork that has been submitted and accepted into in situ — including title, contributing artist, and a short description of the piece.</p>
-          <div class="artwork-table-wrapper">
-            <div id="artwork-loading" class="artwork-loading">Loading artwork index&hellip;</div>
-            <div id="artwork-error" class="artwork-error" hidden></div>
-            <table id="artwork-table" class="artwork-table" hidden>
-              <thead>
-                <tr>
-                  <th scope="col">Title</th>
-                  <th scope="col">Artist</th>
-                  <th scope="col">Description</th>
-                </tr>
-              </thead>
-              <tbody id="artwork-tbody"></tbody>
-            </table>
+          <div class="artwork-tabs">
+            <div class="artwork-tab-nav" role="tablist">
+              <button class="artwork-tab-btn active" role="tab" aria-selected="true" aria-controls="tab-2025" id="btn-2025">2025</button>
+              <button class="artwork-tab-btn" role="tab" aria-selected="false" aria-controls="tab-2026" id="btn-2026">2026</button>
+            </div>
+            <div class="artwork-tab-panel active" id="tab-2025" role="tabpanel" aria-labelledby="btn-2025">
+              <div class="artwork-table-wrapper">
+                <table class="artwork-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Artist</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <tr><td>Ace Christensen</td><td>Amenities</td><td>The novelty and oddity of an indoor pool.  Pen, Watercolor &amp; Construction Paper.</td></tr>
+                <tr><td>Dr. Adi Khen, Smith Lab</td><td>Seaweed Wreath</td><td>Digital art featuring scanned pressings of Northern California seaweeds</td></tr>
+                <tr><td>Dr. Adi Khen, Smith Lab</td><td>California Seaweeds Overlaid</td><td>Digital art featuring scanned seaweed pressings</td></tr>
+                <tr><td>Dr. Adi Khen, Smith Lab</td><td>Tropical Seaweed Heart</td><td>Digital art featuring scanned pressings of tropical seaweeds</td></tr>
+                <tr><td>Ahmi Cacapit</td><td>Photogrammetry survey of a coral reef</td><td>Scuba diver conducting long-term monitoring data using photogrammetry</td></tr>
+                <tr><td>Ahmi Cacapit</td><td>A day off (in the field)</td><td>35mm film photos taken during one of our days off in the field in Upolu, Samoa</td></tr>
+                <tr><td>Aiden Beaupain</td><td>BLU</td><td>The deep BLU ocean - An endless expanse of coalescing freeforms</td></tr>
+                <tr><td>Allie Smith/Tide Craft</td><td>Weedy Sea Dragon</td><td>This is an original digitally drawn piece that I carved into rubber to make a stamp.</td></tr>
+                <tr><td>AM</td><td>[no title]</td><td>(jellyfish painting)</td></tr>
+                <tr><td>Amita Stowitts</td><td>the sea is sick and so am I</td><td>My submission is a poetry piece. Recently I&#x27;ve been thinking about the role human activity may have played in the development of my chronic illness. I wanted to explore how the disease connects me to the natural world (in this piece, the ocean specifically).</td></tr>
+                <tr><td>Ann Madden</td><td>spiraling</td><td>Collage constructed using cut images from &#x27;The Illustrated Guide to Crystals&#x27; by Judy Hall + &#x27;Florida&#x27;s Fabulous Seashells&#x27; by Williams/Carmichael</td></tr>
+                <tr><td>Ann Madden</td><td>spineless soirée</td><td>Collage constructed using cut images from &#x27;Field Guide to the Atlantic Seashore&#x27; by Kennet Gosner</td></tr>
+                <tr><td>Ann Madden</td><td>plenty o&#x27; fish</td><td>Collage constructed using cut images from &#x27;Art Forms in Nature&#x27; by Haeckel and &#x27;The Fresh Water &amp; Salt Water Fishes of the World&#x27; by Migdalski et al.</td></tr>
+                <tr><td>Anna Golub</td><td>California scenes in watercolor</td><td></td></tr>
+                <tr><td>Anna Golub</td><td>East Pacific Rise, watercolor + pen&#x27;</td><td>Sketch and watercolor of DSV Alvin and R/V Atlantis, from fieldwork above the East Pacific Rise in December 2024 and partly inspired by photos of Alvin &amp; Atlantis taken by Luis Lamar (WHOI)</td></tr>
+                <tr><td>Annika Vawter</td><td>Kelp Canopy in Fused Glass</td><td>Fused glass work depicting Macrocystis kelp fronds in the forest canopy</td></tr>
+                <tr><td>Anonymous</td><td>Manglar doodle</td><td>A quick mangrove doodle consisting of colored leaves in the background and a mangrove tree overlaying the leaves</td></tr>
+                <tr><td>Anonymous</td><td>Megaptera novaeangliae</td><td>Page out of a journal</td></tr>
+                <tr><td>Anonymous</td><td>Portrait of a Garibaldi</td><td>It’s a sketch of a garibaldi. The little orange guys are California’s state fish and funny as heck. Very territorial and cute.</td></tr>
+                <tr><td>Arden Boice</td><td>Beach Cliffs</td><td>This piece was made after a trip I took with my roommate to the cliffs near Gliderport. It is made digitally using ClipStudio.</td></tr>
+                <tr><td>Austin and Angus Thies</td><td>Doomsday Denim</td><td>Made from recycled denim, linoleum block cuts, and ink. Inspired by the recent appearance of Oarfish around La Jolla. For print requests contact Austin Thies - austinthies13@gmail.com</td></tr>
+                <tr><td>Brittany Lockhart</td><td>Stillness and Motion</td><td>This photography is from a series of neutral density long exposures taken at Shaw&#x27;s Cove in Laguna Beach, CA</td></tr>
+                <tr><td>Brynli Toulze</td><td>Worm&#x27;s-eye View</td><td>A portrait picture of a new hesionid species from the Rosebud Whale Fall</td></tr>
+                <tr><td>Caitlin Kenney</td><td>Quacking Down on Plastic Pollution</td><td>This is a mixed-media piece featuring translucent plastic ducks that depict the flow of ocean currents on a watercolor world heat map. It was inspired by an event in 1992 in which a container ship accidentally dumped tens of thousands of plastic ducks and other animals into the ocean, which were then tracked around the world and used to map ocean currents. The ducks are meant to represent the human impact on the environment, while also serving as a reminder of human creativity and resourcefulness in recovering from our mistakes.</td></tr>
+                <tr><td>Caitlyn Webster</td><td>Nanomia bijuga</td><td>This is a scientific illustration for the publication, &quot;Distributed propulsion enables fast and efficient swimming modesin physonect siphonophores.&quot;</td></tr>
+                <tr><td>Carol</td><td>Backyard</td><td>My friends inspired me to take more photos.</td></tr>
+                <tr><td>Carolina Lorena Berys</td><td>Balance</td><td>Illustration of a mermaid performing a balancing pose - gouache on paper. The image was inspired by a photo from the June 2013 issue of LA Yoga Magazine. The mermaid tails was inspired by royalty-free elements created by DeviantRoze on deviantart.com</td></tr>
+                <tr><td>Carolina Lorena Berys</td><td>Repose</td><td>A mermaid reclines in repose - acrylic on board. The mermaid tails was inspired by royalty-free elements created by DeviantRoze on deviantart.com</td></tr>
+                <tr><td>Center for Marine Biodiversity and Conservation - 2025 Winter Reading Group (collage contributors: Mara Button, Sam Clements, Megan Dickerson, Kristina Dizon, Shannon Dolan, Allison Kellum, Leticia Lee, Theodora Mautz, Kevin Pease, Nan Renner, Thomas Rocca, Marissa Saenger, Stephania Torres-Londono, Steffaney Wood)</td><td>Our Vision for a Positive Climate Future</td><td>The CMBC 2025 Winter Reading Group&#x27;s collective vision for positive climate future, and ourselves in it. Collage inspired by &quot;What If We Get It Right?&quot; by Ayana Elizabeth Johnson (PhD 2011). Media: Mixed paper.</td></tr>
+                <tr><td>Christine Steinke</td><td>Kelp Forest</td><td>Watercolor painting of a kelp forest.</td></tr>
+                <tr><td>Christine Steinke</td><td>Flamboyant Cuttlefish</td><td>Watercolor painting of a flamboyant cuttlefish.</td></tr>
+                <tr><td>CJSea</td><td>Paleoenvironmental Reconstruction of the Red Hills Fossil Flora and Fauna</td><td>A reconstruction of the Red Hills Locality&#x27;s paleofauna and flora from the Devonian period. The illustration and references were in collaboration and consulted with the commissioner to accurately represent the organisms according to prior research. (Link:https://www.researchgate.net/publication/386874666_New_Specimens_of_the_Fossil_Fauna_and_Flora_of_the_Red_Hill_Locality_Hyner_PA_Famennian_Stage_Upper_Devonian)</td></tr>
+                <tr><td>Claire Abby Bratton</td><td>Meroplankton</td><td>&quot;Meroplankton&quot; is a poem on the feeling of being adrift.</td></tr>
+                <tr><td>Dante Capone</td><td>Ashes to Algae</td><td>Pen and ink drawing laser engraved and modified</td></tr>
+                <tr><td>Emily Ignatoff</td><td>Ripple Effect</td><td>This painting uses the diverse body shapes seen in fishes to create a pattern where growing outlines collide to form new spaces, capturing a &quot;ripple effect&quot; like when a rock is thrown into water (inspired by Zentangle). Medium: gouache on watercolor paper</td></tr>
+                <tr><td>emily nixon</td><td>branching to break</td><td>poetry</td></tr>
+                <tr><td>emily nixon</td><td>draft of freedom (why i freedive)</td><td>poetry</td></tr>
+                <tr><td>Evie</td><td>It’s raining</td><td>Enjoying the rain?</td></tr>
+                <tr><td>Freya Hammar</td><td>Bleaching</td><td>This is a digital painting titled Bleaching. I intended it as a commentary on the fragility of marine ecosystems and the human connection to oceanic degradation. It juxtaposes  the living reef with a bleached one, a living woman and her skeleton, dark hair and bleached hair, et cetera, symbolizing the impact of coral bleaching and pollution on marine ecosystems.</td></tr>
+                <tr><td>Gabriel Gekas</td><td>Catalina Garibaldi</td><td>I took this photo while helping a friend with a scuba course in the Avalon Open Water Park. The photo was taken with an Olympus TG6, a little point-and-shoot that is very convenient for capturing photos of opportunity. I think it&#x27;s the best framed subject photo I&#x27;ve taken this year; no post-processing or color correction was performed on this photograph.</td></tr>
+                <tr><td>Gabriel Gekas</td><td>Revelle from Above</td><td>While flying a large drone to collect ocean topographic data, this image was taken by the onboard camera sampling at about 2 Hz. Images from this experiment are being used to extrapolate sun glitter distribution data and the mean-squared slope distribution of the underlying surface gravity wave field.</td></tr>
+                <tr><td>Gianna Villanueva</td><td>“Standing Still”</td><td>Evolutionary change; through the lens of a photographer. How everyday life and creatures are captured if for a moment, time stood still.</td></tr>
+                <tr><td>Isidora Rojas</td><td>Devotional to the Cliffs</td><td>Journal entry / prose</td></tr>
+                <tr><td>Jordan DiNardo (Epicurious Fisheries Scientist and SIO Alum)</td><td>Savor the Science</td><td>A glimpse into a dinner series where science, seafood, and storytelling intersect — told through words and a visual collage. Included is a vision board pieced together from images found via Pinterest, capturing the imagery and inspiration behind Savor the Science. The images are used solely for illustrative, non-commercial purposes to reflect aesthetic and thematic direction; all rights remain with the original creators.</td></tr>
+                <tr><td>Julia</td><td>Jellyfish bloom</td><td>Watercolor depicting the concept that climate change may increase the jellyfish population</td></tr>
+                <tr><td>Kassidy Du Vongxay</td><td>The Open</td><td>35mm film photo of an unridden wave on the south side of the Huntington Beach pier during a heat of the US Open of Surfing.</td></tr>
+                <tr><td>Kassidy Du Vongxay</td><td>Breeze</td><td>35mm film photo of Crescent Bay in Laguna Beach taken during golden hour.</td></tr>
+                <tr><td>Katya Sumwalt</td><td>Early Morning Run</td><td>poetry</td></tr>
+                <tr><td>Keira Malarky</td><td>A Sea Where I Change</td><td>This is just a little kelp forest I decided to paint on my dresser. Some of my favorite places to snorkel and dive in Southern California are the kelp forests of Catalina and La Jolla. It was super fun to paint this and I think it will be a continuous mural that I modify over time (another factor that adds to my play on words for the “seas of change” theme).</td></tr>
+                <tr><td>Keira Malarky</td><td>Look!</td><td>This photo is really special to me. I think it captures the essence of child-like wonder, and the gravity that the ocean has on children. I have memories of visiting aquariums as a kid with my face pressed up against the glass, in complete awe of the alien-like world in front of me.</td></tr>
+                <tr><td>Kristina Fleetwood (she/her)</td><td>Armed to the teeth: Arm use in defensive behaviors of Octopus bimaculatus</td><td>This piece is an artistic representation (watercolor and ink on paper with project descriptions for captions) of my first experience conducting cephalopod research, during an REU on Catalina Island. The now Dr. Kelley Voss and I conducted a series of behavior trials with California two spot octopuses and California morays, providing a firsthand opportunity to become acquainted with their posture, coloration, and individual personalities. I&#x27;m grateful for the perspective and joy this project imparted to me. As a graduate student, I now study much deeper-dwelling species, but my respect and admiration for them remains the same.</td></tr>
+                <tr><td>Laís Lima</td><td>Sea of Change</td><td>Poetry</td></tr>
+                <tr><td>Lily Raymond</td><td>Snacking</td><td>Acrylic painting of a sea turtle eating a jellyfish</td></tr>
+                <tr><td>Lindsey Kim</td><td>Copilia</td><td>This illustration was made using photos I have taken from my own microscope work :)</td></tr>
+                <tr><td>Linnea Cooley</td><td>Algae Collection at Lake Johanna</td><td>This piece is acrylic on canvas. It is a painting of me collecting algae for my first ever independent research project in high school.</td></tr>
+                <tr><td>Linnea Cooley</td><td>Nautilus</td><td>This is a triptych with acrylic, photo transfer, ink, and collage elements on canvas. The concept behind it is a progressive abstraction--in this case, the &quot;original&quot; piece is a nautilus in the ocean, which is abstracted first to a fossil and old-timey scientific illustration, and then to math and graphing.</td></tr>
+                <tr><td>Linnea Cooley</td><td>Descent</td><td>This piece is acrylic and charcoal on wooden boards. Each panel depicts a different ocean zone and the organisms that reside there.</td></tr>
+                <tr><td>Lisa Tauxe</td><td>Haiku while drilling</td><td>A series of haiku and photos that tell tales of expeditions aboard the Joides Resolution</td></tr>
+                <tr><td>M.E.B.</td><td>inner shelf</td><td>Illustrated free-form poetry</td></tr>
+                <tr><td>Maile</td><td>Pen Holder for Lab</td><td>I made a cup on the wheel and scratched various viral morphologies on it to use as a pen holder in our lab (we study viruses).</td></tr>
+                <tr><td>Matias Alvarez</td><td>Beneath the Giant</td><td>This is a photo I took while diving in Raja Ampat, Indonesia. I was lucky enough to visit a manta cleaning station and after an uneventful first dive we had this marvelous encounter with a couple of mantas.</td></tr>
+                <tr><td>Matias Alvarez</td><td>Clownfish Playground</td><td>The world famous dive &quot;Melissa&#x27;s Garden&quot; gave me the opportunity to capture a thriving anemone living under a storm of damselfish</td></tr>
+                <tr><td>Matias Alvarez</td><td>Bubble of Life</td><td>The anemones seem to be a small bubble of life, where the clownfish feel safe from the other reef inhabitants. This was what I aimed to capture with this image.</td></tr>
+                <tr><td>Matias Alvarez</td><td>Hidden Among the Tentacles</td><td>As I waited with my camera aimed at the flowing appendages of the anemone, this curious clown fish came out and nearly ran into my dome port.</td></tr>
+                <tr><td>Melissa Brock</td><td>A wave of change</td><td>Mixed media collage representing the intersection of climate grief and hope</td></tr>
+                <tr><td>Melissa Miller</td><td>My Sunset</td><td>Hi team, love this idea and will champion it in any helpful way. This is a poem I wrote onboard R/V Roger Revelle while doing research at sea in 2012. I am hoping to join a creative session to see if I can also come up with something new, but wanted to get this in right away.</td></tr>
+                <tr><td>MS</td><td>Bending the Curve</td><td>This is a screen-captured image from a video of me dancing. I am in a curved shape and I have added text on the photo to form a haiku.</td></tr>
+                <tr><td>Nan Renner</td><td>Covid Doodles</td><td>Black and white graphic drawings, some are raw material for a coloring book and/or wallpaper</td></tr>
+                <tr><td>Nan Renner</td><td>A Celebration of Life (1)</td><td>Black and white graphic drawings, some are raw material for a coloring book and/or wallpaper</td></tr>
+                <tr><td>Nao Song</td><td>A Prophetic Dinner</td><td>A Prophetic Dinner is a digital artwork that illustrates a dinner scene where the main course, fish, is replaced by money. This was an intentional choice meant to portray the changing relationship between humans and the ocean as we continue to take its resources in the name of profit.</td></tr>
+                <tr><td>Nicole Schriber</td><td>Killer Views of SIO</td><td>This photo features Nicki, an Eastern Tropical Pacific killer whale, traveling past Scripps Pier. Though orcas are rare in San Diego waters, Nicki&#x27;s pod has made sporadic appearances off of our coast, providing incredible opportunities to research these elusive whales.</td></tr>
+                <tr><td>Nicole Schriber</td><td>Sunset Traveling</td><td>Eastern Tropical Pacific killer whale Diego pops up in the sunset light behind his older family member, Nicki, who babysits him while his mom is getting some much-needed alone time.</td></tr>
+                <tr><td>Nicole Schriber</td><td>The Hunt</td><td>Eastern Tropical Pacific killer whale Ana jumps to intercept a leaping bottlenose dolphin right off the coast of La Jolla. Ana and her pod work together to bring down the dolphin, continuing the great circle of life.</td></tr>
+                <tr><td>Oc</td><td>Seaing in colours: making heads and tails out of a synesthetic brain</td><td>A piece in aquarelle is accompanied by a song interpreting the synesthetic response of a self portrait</td></tr>
+                <tr><td>Peter Shearer</td><td>Naga Lane</td><td>This photomontage was assembled from photos taken with my iPhone in January 2025. I was inspired by the photographic collages of David Hockney.</td></tr>
+                <tr><td>Sam L</td><td>Day to Night</td><td>Mt. Taranaki Maunga as day shifts to night</td></tr>
+                <tr><td>Sam L</td><td>Open Sea</td><td>Evening open seas off the port side of R/V Sally Ride - CalCofi Fall 2024</td></tr>
+                <tr><td>Samantha Clements</td><td>Trystan&#x27;s dolphriends</td><td>Acrylic paint on upcycled canvas inspired by a drone photo captured and stylized by the late Trystan Snodgrass (IG: @drone_dude_trystan) (December 15, 1984 - May 8, 2025).</td></tr>
+                <tr><td>Sara</td><td>Night Shift</td><td>poem</td></tr>
+                <tr><td>Sarah Rose</td><td>WAIS Divide</td><td>To understand historic ice flow in Antarctica, scientists utilized cross-polarized filters to photograph slices of ice from the WAIS Divide Ice Core. This ice cores serves as a climate proxy, an archive of the chemical and physical properties of the past used to model the future. Yet, access to this research and the imaging technologies that scientists use to demarcate the ice crystal structure remains under explored. I compiled images from the data set and collaged them into planes which represent each 1000-meter depth of the ice core. I then engineered a pop-up mechanism that would stack each of these planes with the coldest, newest ice samples on top and the warmest, oldest ice samples on the bottom. Through the outline of Antarctica at the base, these images transform into a topographic form. This creates an entry point for posing questions and complicating the often over-simplified narrative of the ice caps melting.</td></tr>
+                <tr><td>Shannon Dolan</td><td>Tidal Weave</td><td>Tidal Weave is a crochet sweater made following the maelle sweater pattern by Alex la Terreur. The dark blue, light blue, and green hues form an alternating retro wave pattern that reminds me of the tranquil waves seen from Scripps. It also symbolizes the ebb and flow of challenges and progress that come with being a graduate student.</td></tr>
+                <tr><td>Sierra Byrne</td><td>Los Peñasquitos Lagoon</td><td>This ceramic tray features the Los Peñasquitos Lagoon, located between Torrey Pines and Del Mar, as seen from a satellite. An estuary is a dynamic environment, rapidly responding to changes from both the ocean and land. My intention was to create this art, from clay and earth, to eternalize a moment from this very transient place in a permanent medium.</td></tr>
+                <tr><td>Susan Baron</td><td>UV_Anemone</td><td>Tide pool Anemone under UV</td></tr>
+                <tr><td>Susan Baron</td><td>Jewel Anemone</td><td>Jewel anemone photographed in Monterey Bay</td></tr>
+                <tr><td>Tess Gauthier</td><td>A Home Worth Saving</td><td>A beautiful kelp bass swims through a kelp forest in Fisherman&#x27;s Cove, Catalina Island. Taken on Fujifilm QuickSnap Waterproof Disposable Camera.</td></tr>
+                <tr><td>Theodora Mautz</td><td>Psalm for the Squid</td><td>Secular elegy composed in the style of Anglican chant, honoring the squid that I have to sacrifice for my research. The alto line opens with the notes C-E-F-A, a musical cryptogram for “cephalopod.” In the second section, the alto line begins with the Dies irae motif, a reference to the medieval Gregorian chant used to mourn the dead. Accompanying the music is a digital drawing of two market squid (Doryteuthis opalescens) suspended in a mating embrace. To hear the psalm, search &quot;Psalm for the Squid&quot; on Youtube.</td></tr>
+                <tr><td>Dr. Tim Lueker</td><td>The Big Melt</td><td>Cross-section of an ice cap melting from accelerated warming caused by burning fossil fuels</td></tr>
+                <tr><td>Dr. Tim Lueker</td><td>Home on the Reef</td><td>A collection of unique and beautiful inhabitants of coral reefs threatened by climate change that results from burning fossil fuels</td></tr>
+                <tr><td>Toni Sleugh</td><td>embroider.sea</td><td>Hand embroidery on pillow made from recycled denim</td></tr>
+                <tr><td>Vrinda Gianchandani</td><td>Mango Tree Nostalgia</td><td>Enamoured by the single mango tree on my vast school field for years, I used old childhood rags, dreamy purple acrylics, and polaroids of a different time to paint the feeling of nostalgia—a manifestation of one of my fondest memories connected to nature.</td></tr>
+                <tr><td>Xiaoyu Zou</td><td>Sunbath at La Jolla</td><td>This painting captures a serene and memorable moment from my first visit to La Jolla Cove six years ago, inspired by the graceful presence of a sea lion basking in the sun. The warm yellow tones dominate the canvas, evoking the brightness of the sunlight and the warmth of the day. The sea lion is portrayed in a relaxed pose, its form elegantly blending into the golden surroundings. I painted it as an assignment for my oil painting class, and the original piece is preserved in my home in China.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="artwork-tab-panel" id="tab-2026" role="tabpanel" aria-labelledby="btn-2026">
+              <div class="artwork-table-wrapper">
+                <table class="artwork-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Artist</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <tr><td>Ace Christensen</td><td>Hydria</td><td>Linocut Print</td></tr>
+                <tr><td>Dr. Adi Khen, Smith Lab</td><td>Common Southern California Seaweeds</td><td>Digital art with scanned pressings of common seaweeds found in Southern California</td></tr>
+                <tr><td>Dr. Adi Khen, Smith Lab</td><td>Non-Native Southern California Seaweeds</td><td>Digital art with scanned pressings of non-native seaweeds found in Southern California</td></tr>
+                <tr><td>Ahmi Cacapit</td><td>Kichu</td><td>Watercolor</td></tr>
+                <tr><td>Ahmi Cacapit</td><td>Fieldwork Film</td><td>Pictures captured on the Palmyra 2025 expedition in September</td></tr>
+                <tr><td>Aiden Beaupain</td><td>Governing Forces On Downstream Thoughts</td><td>Existence in a world of substantial trouble, we must cling to the parts that color our lives with hope.</td></tr>
+                <tr><td>Amita Stowitts</td><td>Selections from a Journal</td><td>This piece is a short story told via snippets from an unnamed narrator&#x27;s personal journal.</td></tr>
+                <tr><td>Anonymous</td><td>A Prayer for Entropy</td><td>Written at a conference.</td></tr>
+                <tr><td>Aurora Czajkowski</td><td>Meditations from a commute home</td><td>Written thoughts from a commute a few months ago. Reflecting on change and the magic of the mundane.</td></tr>
+                <tr><td>Bethany Campbell</td><td>Florida Elegy</td><td>Florida Elegy is a personal essay and lament of all that has been lost since moving to California.</td></tr>
+                <tr><td>Brenna Bell</td><td>My Happy Place in the Sea</td><td>2’ x 5’ tufted rug depicting a colorful coral reef with a friendly octopus.</td></tr>
+                <tr><td>Bryndan Cyr Bedel</td><td>Seal Talk</td><td>The Children&#x27;s Pool in La Jolla is a favorite place of mine where I can observe seals and sea lions in their natural habitat. During one of my walks, I watched a colony of harbor seals enjoying a quiet moment of safe sanctuary and having fun with fellow rookery mates. They definitely gave their seal of approval!</td></tr>
+                <tr><td>Caitlin Kenney</td><td>a shark</td><td></td></tr>
+                <tr><td>Carol</td><td>Backyard2</td><td>I live near a lake with open space and I hear coyotes at night. Egrets have walked down the sidewalk and I often find beautiful souvenirs (French for remembrance or memory) of wildlife right in my backyard.</td></tr>
+                <tr><td>Carolina Lorena Berys</td><td>Wings</td><td>Oil paint on canvas, 18 x 18 in. This painting conveys themes of transformation and catalyzing personal experiences into growth.</td></tr>
+                <tr><td>Carolina Lorena Berys</td><td>Athena</td><td>Oil paint on canvas, 16 x 20 in. A woman’s face emerges from layers of color, meeting the viewer. Her gaze is fierce yet steady and confident.</td></tr>
+                <tr><td>Carolina Lorena Berys</td><td>Soul Screen 2 - Equatorial Countercurrents</td><td></td></tr>
+                <tr><td>Caroline Miller</td><td>Enveloped</td><td>The girl embodies a surrender to the power of the fast-paced and ever-changing currents of the ocean. Instead of resisting the water&#x27;s sudden changes, she becomes enveloped, letting herself be surrounded and carried by it.</td></tr>
+                <tr><td>Charles</td><td>Wax Monster</td><td>Wax art on 9&#x27;8&quot; Sakoda longboard</td></tr>
+                <tr><td>Charlotte Bellerjeau</td><td>Kelp</td><td>This collage explores themes of militarization and pollution in the ocean while invoking the vibrancy and biodiversity of a kelp forest. It is made entirely of plastic found on Southern California beaches (excluding the frame, felt backing, and glue). Look up Nurdle Patrol to learn more about nurdles, and maybe start your own collection on a local beach.</td></tr>
+                <tr><td>Christine Steinke</td><td>Above the Coast</td><td>This is a watercolor painting of the beach from above.</td></tr>
+                <tr><td>Dante Capone</td><td>The Plankton Pump</td><td>Inspired by schematics of the biological carbon pump, this piece depicts the flow of zooplankton data from collection to output. The lefthand side of the drawing is more tactile approaches and the methods shift towards automation and abstraction to the left. The top of the plot shows the data collection, which is pumped downwards into data outputs.</td></tr>
+                <tr><td>Deena Lang</td><td>Glowing Waters</td><td>Acrylic on canvas.</td></tr>
+                <tr><td>Dovi Kacev</td><td>Mantle Wellness Day</td><td></td></tr>
+                <tr><td>Eitan Rapaport</td><td>Hearst Castle Zebra</td><td>The wild zebra of San Simeon remain one of my favorite stops along California&#x27;s mystical Central Coast. Descended from the herd released after the dismantling of William Randolph Hearst’s private zoo, they are a unique sight, and a living testament to resilience and the beauty of being unapologetically out of place.</td></tr>
+                <tr><td>Ella Croty</td><td>Vent Tapestry</td><td>This piece was woven on a handmade bead loom, as a gift for a friend who researches hydrothermal vents. While it was woven before the zine theme, hydrothermal vent ecosystems, relying on chemosynthesis, could be considered countercurrent relative to most other ecosystems on Earth.</td></tr>
+                <tr><td>Emily Nixon</td><td>On going home</td><td>a poem</td></tr>
+                <tr><td>Emily Nixon</td><td>Into the Light</td><td>poem</td></tr>
+                <tr><td>Ethan Staats</td><td>no title / untitled</td><td>A tidepool on the North-American West coast, in North-West Los Angeles County, CA, settles under a fading winter dusk. The water here is cold. The air is also cold. My denim jacket is damp and dirty and salty. For the moment this tidepool is peaceful, as the tide has receded enough that only occasional waves froth over the rocks, rippling the water in the pool barely enough to reach the back side. Waves crash on the rocks in the mid-ground, and the fringe of Los Angeles lights up the coast in the background.
+
+unfiltered digital fluorescence photograph of 3 different CA-native green sea anemone species (Anthopleura spp.); the green spots in the middle of the frame are each individual sea anemones, including 1 sunburst sea anemone (A. sola) of the rare neon genotype/phenotype.</td></tr>
+                <tr><td>Ethan Staats</td><td>what emerges</td><td>for years now, my primary hobby has been finding reptiles and amphibians in their native habitats; &quot;herping&quot; colloquially. since arriving in California, this practice has taken me across the distances of the US American south west, as well as to the deepest places within me. it has excited me, connected me, humbled me, lifted me, wounded me, rewarded me, frightened me, inspired me, taught me; gave me at least part of the capacity to build and become. i am compelled by it. it even contributes directly to our body of scientific knowledge on these organisms:
+Staats et al. Herpetological Review 54 (1): 74.
+Staats et al. Herpetological Review 55 (2): 220.
+
+there is an art to finding, to understanding, and to the connection i share with these animals. if art is expression, and expression of the self is part of the practice of having one, then to suggest i should put it to the side is to suggest i should put myself, past, present, and future, to the side. i could not even if i should. but, i will not. i can have both. this collage is a summary of my practice of becoming and my experience of being.</td></tr>
+                <tr><td>Freya Hammar</td><td>Fallen Angel</td><td>The more I think about it, the more I feel that a whale fall is a kind of communion. It is a congregation of many individuals who come together for a shared meal, which happens to be the body of a greater being. I wanted to create a peaceful, angelic, and otherworldly depiction of a whale, to contrast with the generally morbid phenomenon of a whale fall, so I decided on a mermaid to give the blessing of her body to the benthic community.</td></tr>
+                <tr><td>Helen Dufel</td><td>Turtle Paradise</td><td>This photo was taken while diving at a site called Turtle Paradise in Moorea, French Polynesia. We had just completed a busy research cruise from Hawaii to Tahiti where we studied tropical instability waves.</td></tr>
+                <tr><td>Isidora Rojas</td><td>A Prayer to a Wave</td><td>Poem/prose</td></tr>
+                <tr><td>Jessica McLaughlin</td><td>Consumption</td><td>Mixed Media. Acrylic paint and paper, shell, and beaded collage on paper. 
+Consumption - the process of spending wastefully</td></tr>
+                <tr><td>Jessica Zhong</td><td>Pelagics</td><td>A bonito, a swordfish, a tuna, and an opah swim into a current. The barnacle asks, water you having today?</td></tr>
+                <tr><td>Kate</td><td>Missing Home</td><td>This is a 2D 10&#x27;&#x27; x 8&#x27;&#x27; painting depicting an almost summer Alaskan dusk, with pink clouds over snow dusted mountains and green foliage. Dated 12/29/2025, serving as a final farewell art piece to 2025.</td></tr>
+                <tr><td>Kate</td><td>Fire Fountain</td><td>A colored pencil rendering of a volcanic fire fountain. Inspired by Kīlauea, an active shield volcano located in Hawai&#x27;i.</td></tr>
+                <tr><td>Keenan Murray</td><td>Welcome to Earth</td><td>Biologists and trained volunteers gather newly emerged East Pacific Black Sea Turtle hatchlings at the research station on Colola Beach, Mexico.  The vibrantly energetic turtles erupt from the sand nightly in the hatchery fully read to take on the mighty Pacific. These hatchlings will one day visit the Southern California coast.</td></tr>
+                <tr><td>Kenan Chan</td><td>Nereocystis</td><td>Cyanotype print of a photograph I took of Nereocystis luetkeana growing along the Central California Coast.</td></tr>
+                <tr><td>Kiirah Green</td><td>Plank</td><td>This plank of wood washed up on the shores of Catalina island in the summer months of 2021. It landed on a smaller pebble and rock lined beach tucked in the corner of Long Point. The beach was opposite the ocean facing side of the island and the waters are calm. This was my home.</td></tr>
+                <tr><td>Kristina Fleetwood</td><td>Survivors at sunrise</td><td>On the surface, the open ocean is a beautiful and even seemingly serene place. But beneath the surface, there is much more movement than apparent to the casual observer. Currents carry tiny drifters and small swimmers to new opportunities and peril alike — of predators and even us scientists, as we collect our samples to make sense of this complex environment. 
+This piece is an ode to the small survivors of the pelagic - those who will never be caught by our nets or explicitly represented in our data, but contribute to the ecosystem’s function and beauty nonetheless.</td></tr>
+                <tr><td>Lily Bowen</td><td>Leafy Seadragon Dreams</td><td>A digital drawing of a leafy seadragon, inspired by visits to the Birch Aquarium.</td></tr>
+                <tr><td>Lily Bowen</td><td>Leopard Shark</td><td>A digital drawing of a leopard shark, a native species to San Diego</td></tr>
+                <tr><td>Lily Bowen</td><td>Tidal Connections</td><td>Shown is a mixed-media ceramic pot with hand built sea star and barnacles. The charcoal drawings represent cave drawings and the connection between humans and the ocean. The weaving shows how interwoven we are.</td></tr>
+                <tr><td>Lily Bowen</td><td>Shores</td><td>A glazed ceramic leopard shark and Garibaldi fish that represents a small part of our ecosystem in San Diego</td></tr>
+                <tr><td>Lizzie Tucker</td><td>Anchored</td><td>Painting of a seal horse anchored to a human hand, acrylic on wood board</td></tr>
+                <tr><td>Lizzie Tucker</td><td>Canned</td><td>Painting of hermit crab in soup can, acrylic on wood board</td></tr>
+                <tr><td>Lorea Dandoy</td><td>In Sync</td><td>Captured during the sardine run in Magdalena Bay, Baja Mexico, striped marlin and sea lions move in concert—each playing their part in the hunt.</td></tr>
+                <tr><td>Lorea Dandoy</td><td>Caught in the Open</td><td>Mid-hunt and in pursuit, a striped marlin and sea lion close in on a small school of sardines from opposite directions. Photo captured during the sardine run in Baja California, Mexico.</td></tr>
+                <tr><td>Maile Heyer</td><td>Kelp Forest</td><td>Stained glass of a Garibaldi and some kelp!</td></tr>
+                <tr><td>Maitri Rangarajan-Paul</td><td>Hello Octopus</td><td>A depiction of my favorite species of octopus, our local California two-spot. I spend a lot of time with them at the Scripps tidepools and wanted to emphasize the complexity, vibrance, and chaos of these color-changing highly intelligent beings.</td></tr>
+                <tr><td>Malia Reiss</td><td>&quot;Delicate&quot;</td><td>Botany was once the only socially acceptable science for women to pursue because of the &quot;delicate&quot; nature of both women and plants. Women took this opportunity to shape this field, with botanists being among the first women to graduate college and become scientists. In 1843,  Anna Atkins was the first person to publish a book with photographs––Cyanotype pictures from Photographs of British Algae. 
+
+Cyanotypes are made from coating paper with light-sensitive chemicals and exposing it to sunlight––any part of the paper shaded (for example, by a algal specimen) remains un-reduced. The final print is developed in water, where the iron salts are washed away leaving the UV-exposed parts blue. 
+
+After spending most of my research life as a terrestrial botanist, I have only recently begun to study and cyanotype algae. I hope to continue experimenting, and connecting to and honoring the women who shaped science and botany. As seen throughout the past and present, both women and plants are markedly resilient––and far from delicate. 
+
+This is a selection of cyanotypes that I made right outside my office in CCS (Center for Coastal Studies). I&#x27;m still in the process of experimenting, most recently using oil pastel on &quot;failed&quot; cyanotypes.</td></tr>
+                <tr><td>Mariah Avila</td><td>Waves in Clay</td><td>This pot was entirely built by hand through coiling and slab-building methods. The clay itself is gritty and reminiscent of sandstone, so I left the majority of the outside unglazed to highlight the form, while the inside is glazed in blue and green. The process was meditative as I let the clay lead me into the final shape.</td></tr>
+                <tr><td>MS</td><td>Opposition</td><td>A collage of screen captures from a video of me dancing. I am countering forces from the rotation of the pole to maintain integrity in each movement.</td></tr>
+                <tr><td>Nicole Schriber</td><td>Resilience</td><td>Kulea, the disabled humpback whale, lunges to catch anchovies in her own unique way. Kulea is missing her baleen, so she uses an adaptive feeding strategy. It must work, because she is a healthy whale and has even had a calf!</td></tr>
+                <tr><td>Nicole Schriber</td><td>Go, Diego, Go!</td><td>Diego, a young Eastern Tropical Pacific killer whale, zooms through the water as he plays in the wake of our boat.</td></tr>
+                <tr><td>Nicole Schriber</td><td>Monti and Hubbard</td><td>Gulf of Alaska transient killer whale Monti surfaces in front of the mighty Hubbard Glacier in Yakutat Bay, Alaska.</td></tr>
+                <tr><td>Océane Boulais</td><td>Shellfeggio Synthesizer</td><td>Taking inspiration from the so-called healing &quot;Solfeggio Frequencies&quot;, this scallop-inspired Shellfeggio Synthesizer is an interactive acoustic enrichment object, enabling a healee to integrate polyvagal-regulating frequencies with themselves or another in a playful, modular format. By grounding themselves with the placing of the ancient stone of Laspis Azuli on a finger on their left or right hand, the other hand can “play” the shells like a piano, inducing lulling vibrations to soothe the mind, body and soul.</td></tr>
+                <tr><td>Océane Boulais</td><td>ānandamaya koi-sha</td><td>This piece merges the corporeal and spiritual dimensions of healing through the symbolic dance of two koi fish encircling twin lotus blossoms resting upon lily pads. The composition itself is rendered with biofluid collected during my recovery from chest surgery—a material that transforms personal trauma into an instrument of creation, making visible the body&#x27;s own process of repair and renewal.
+The koi, eternal symbols of perseverance and transformation, move in perpetual circulation around the lotus—the flower that rises pure from murky waters, embodying enlightenment emerging from suffering. This circular motion reflects the mantra meditation practice that guided my inner healing: the recognition of Ananda (bliss), the acknowledgment of Maya (illusion), and the pursuit of Moksha (release). The fish neither begin nor end their journey; they exist in constant becoming, just as healing is not a destination but a continuous unfolding.
+By incorporating my own biofluid as the medium, the artwork dissolves the boundary between subject and object, between the one who heals and the healing itself. The body&#x27;s fluid—typically hidden, discarded, deemed waste—becomes pigment, ink, and meaning. What was once evidence of wounding becomes the very substance of artistic expression, mirroring how our deepest pain can become our most profound teacher.
+The lotus sits serene upon the water&#x27;s surface, roots unseen but nourished by the depths below. Similarly, this piece acknowledges that true healing occurs beneath the visible, in the quiet work of meditation and the body&#x27;s patient cellular regeneration. The duality of two fish and two lotus blossoms represents the balance between shadow and light, between the illusion we perceive and the bliss we can cultivate from within.</td></tr>
+                <tr><td>Phil Zerofski</td><td>Panga in kelp</td><td>Preparing for algae collection on SIO 18 with Phil Zerofski and Dr. Rosie Harris.</td></tr>
+                <tr><td>Philip Wong 黃俊儒</td><td>Parts of a Whole</td><td>Parts of a Whole is a collection of 4 photos. Often times when humans see something massive, the only way to truly comprehend its magnitude is to separate it into smaller, more comprehensible parts. Whale sharks are the largest fish in the oceans, a giant machine covered in ridges and spots.</td></tr>
+                <tr><td>Philip Wong 黃俊儒</td><td>Cherry Blossoms</td><td>The underwater scenes in Indonesia are filled with life. Fish flutter in the water column just like blossoms fall from the cherry trees.</td></tr>
+                <tr><td>Richard Walsh</td><td>Underwater dream</td><td>I often spend many hours of the day on the pier or looking at the pier, but on this day I was under the pier.  The water was so clear and calm it felt like a dream.</td></tr>
+                <tr><td>Rimma Levina</td><td>Along The River</td><td>I wanted to capture the movement of both water and the flora you can find under water. Things there move slowly, magically, freely. This was made with paint pens on a canvas.</td></tr>
+                <tr><td>Rimma Levina</td><td>Portals Within Currents</td><td>I think we love looking at The Ocean because she lures us in with mystery, and keeps us there with beauty.</td></tr>
+                <tr><td>Sabrina Montgomery</td><td>A beautiful curator of death</td><td>A blue ringed octopus around a skull.</td></tr>
+                <tr><td>Sally</td><td>lonely island</td><td>On a lonely island, the sunset is staged day after day, but every day is different</td></tr>
+                <tr><td>Sara G.</td><td>Sunset Surf</td><td>Beach photograph at scripps pier</td></tr>
+                <tr><td>Sarah Ogle</td><td>Warming</td><td>I made this as a way to reduce my stress levels from all of the horrible news including the repealing of the endangerment finding.</td></tr>
+                <tr><td>Sarah Rose</td><td>Resisting Cartography (Terra Australis Incognita)</td><td>Through this work, I explore the ways in which Antarctica continues to resist cartography. The continent was first referred to as Terra Australis Incognita, which translates to the unknown land of the South. I am struck by how, for the average person, this continent maintains a certain level of incognito characteristics. For example, if one were to look up Antarctica on Google Earth, the majority of the continent remains blurry and unarticulated. While there are government organizations, such as the National Aeronautics and Space Administration, which have access to views from the above in greater detail, I am interested in the non-specialist’s understanding and exploration of the content through digital means. To make this work. I first collected over eighty maps of Antarctica, primarily from the heroic, colonial expedition, and then turned them into a pulp. Turning into a grey, handmade paper, these histories were materially embedded in the work. I then created digitally negatives from contemporary mapping technologies, including satellite and radar, as the image for a cyanotype process. The translation of these digital means into a series of cyanotypes adds a materiality that steps away from the screen and into forms that appear cartographic and non-rectangular. Through the paper making process, while vaguely taking the form of landmasses, the paper shapes become a remanent of the process of pulling the pulp away from the rectangular frame.</td></tr>
+                <tr><td>Sasha Giuntoli</td><td>We Met Across the Countercurrent</td><td>A digital art piece dedicated to my long distance best friend.</td></tr>
+                <tr><td>Science Team of CalCOFI RL2601</td><td>CalCRAFTi</td><td>Needle felted marine creatures (and friends!) made aboard the Reuben Lasker during the Winter 2026 CalCOFI Cruise</td></tr>
+                <tr><td>Shannon Dolan</td><td>Revise and Resubmit</td><td>This is my Love Letter Top (pattern by Veronika Lindberg). I frogged and re-knit sections multiple times, undoing hours of work to move forward. The process felt much like the scientific method: hypothesize, experiment, learn, revise, and try again. What now appears as a finished, cohesive piece carries the memory of false starts, corrections, and persistence, reflecting the nonlinear reality of the PhD journey.</td></tr>
+                <tr><td>Svenja Kling</td><td>Sacrifices</td><td>Sea urchin tests in a frame.</td></tr>
+                <tr><td>Theodora Mautz</td><td>Fieldwork Friends</td><td>Dedicated to Scoots, Ramsey, Discover, &amp; Blueberry Scones, and inspired by an argument.</td></tr>
+                <tr><td>Toni Sleugh</td><td>Three People and a Fish</td><td>Embroidery on canvas, a recreation of Keith Haring’s 3 perssonages et poisson</td></tr>
+                <tr><td>Webbie</td><td>Smol Fries</td><td>Illustration of larval marvels- planktonic fish in various developmental forms arranged in kaleidoscopic fashion. Species&#x27; latin names frame the little fishes within.</td></tr>
+                <tr><td>Wesley Sparagon</td><td>splish splash</td><td>Photograph of field technician diving in to the waters of Kāne‘ohe Bay,  Oʻahu, Hawaii. Digital Scans of photograph taken on 35mm Kodak Tri-X 100 film.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -864,79 +1080,21 @@
         chestImg.addEventListener('click', function() { if (!document.getElementById('chest-form').hidden) pwInput.focus(); });
       })();
 
-      // ── Artwork table: fetch from published Google Sheet CSV ──────────────
-      // Columns used (0-indexed): C=2 (Title), H=7 (Artist), I=8 (Description)
-      // To enable: File > Share > Publish to web > CSV in Google Sheets, then
-      // replace SHEET_CSV_URL with the published CSV link below.
-      const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1ArCUo0L3y80MUPwkziSrgeOVDxJd_2mWBTufzi1jY_o/export?format=csv&gid=0';
-
-      function parseCSV(text) {
-        // Minimal RFC-4180 CSV parser (handles quoted fields with commas/newlines)
-        const rows = [];
-        let row = [], field = '', inQuotes = false;
-        for (let i = 0; i < text.length; i++) {
-          const ch = text[i], next = text[i + 1];
-          if (inQuotes) {
-            if (ch === '"' && next === '"') { field += '"'; i++; }
-            else if (ch === '"') { inQuotes = false; }
-            else { field += ch; }
-          } else {
-            if (ch === '"') { inQuotes = true; }
-            else if (ch === ',') { row.push(field); field = ''; }
-            else if (ch === '\r' && next === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; }
-            else if (ch === '\n' || ch === '\r') { row.push(field); rows.push(row); row = []; field = ''; }
-            else { field += ch; }
-          }
-        }
-        if (field || row.length) { row.push(field); rows.push(row); }
-        return rows;
-      }
-
-      function renderArtworkTable(rows) {
-        const tbody = document.getElementById('artwork-tbody');
-        const table = document.getElementById('artwork-table');
-        const loading = document.getElementById('artwork-loading');
-        const errEl = document.getElementById('artwork-error');
-        if (!tbody || !table || !loading) return;
-
-        // Skip header row (row 0); columns: C=2, H=7, I=8
-        const dataRows = rows.slice(1).filter(r => r[2] && r[2].trim());
-        if (dataRows.length === 0) {
-          loading.hidden = true;
-          errEl.textContent = 'No artwork entries found yet — check back soon!';
-          errEl.hidden = false;
-          return;
-        }
-        dataRows.forEach(r => {
-          const tr = document.createElement('tr');
-          [2, 7, 8].forEach(ci => {
-            const td = document.createElement('td');
-            td.textContent = (r[ci] || '').trim();
-            tr.appendChild(td);
+      // ── Artwork tabs ──────────────────────────────────────────────────────
+      document.querySelectorAll('.artwork-tab-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.artwork-tab-btn').forEach(function(b) {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
           });
-          tbody.appendChild(tr);
+          document.querySelectorAll('.artwork-tab-panel').forEach(function(p) {
+            p.classList.remove('active');
+          });
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          document.getElementById(btn.getAttribute('aria-controls')).classList.add('active');
         });
-        loading.hidden = true;
-        table.hidden = false;
-      }
-
-      (function loadArtwork() {
-        const errEl = document.getElementById('artwork-error');
-        const loading = document.getElementById('artwork-loading');
-        fetch(SHEET_CSV_URL)
-          .then(res => {
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            return res.text();
-          })
-          .then(text => renderArtworkTable(parseCSV(text)))
-          .catch(() => {
-            if (loading) loading.hidden = true;
-            if (errEl) {
-              errEl.textContent = 'Artwork index is not yet available \u2014 the Google Sheet needs to be published publicly. Once published, this table will populate automatically.';
-              errEl.hidden = false;
-            }
-          });
-      })();
+      });
     });
   </script>
 
