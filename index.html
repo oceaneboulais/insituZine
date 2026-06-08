@@ -173,6 +173,13 @@
     @media (max-width: 700px) {
       .artwork-table th, .artwork-table td { padding: 0.6rem 0.6rem; font-size: 0.84rem; }
     }
+    .artwork-details { margin-top: 0.5rem; }
+    .artwork-details summary { cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; background: #1a1a1a; color: #fff; border-radius: 6px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.03em; list-style: none; user-select: none; }
+    .artwork-details summary::-webkit-details-marker { display: none; }
+    .artwork-details summary::before { content: '\25B6'; font-size: 0.75rem; transition: transform 200ms ease; }
+    .artwork-details[open] summary::before { transform: rotate(90deg); }
+    .artwork-details summary:hover { background: #333; }
+    .artwork-details .artwork-table-wrapper { margin-top: 1rem; }
   </style>
 </head>
 <body>
@@ -217,7 +224,7 @@
     <div class="container">
       <h2 class="section-title">About</h2>
       <div class="about-content">
-        <p><strong>in situ</strong> is a student-led zine that captures the creative, critical, and curious spirit of the Scripps Institution of Oceanography (SIO) community. Through written word, visual art, photography, and multimedia formats, in situ provides a platform for SIO community members to reflect, reimagine, and express their experiences and perspectives on science, the ocean, academia, and life at Scripps or San Diego—in situ and beyond.</p>
+        <p><strong><em>in situ</em></strong> is a student-led zine that captures the creative, critical, and curious spirit of the Scripps Institution of Oceanography (SIO) community. Through written word, visual art, photography, and multimedia formats, <em>in situ</em> provides a platform for SIO community members to reflect, reimagine, and express their experiences and perspectives on science, the ocean, academia, and life at Scripps or San Diego—<em>in situ</em> and beyond.</p>
         
         <h3>Our Goals</h3>
         <ul class="goals-list">
@@ -400,7 +407,7 @@
                 <img src="team/headshots/riley_profile.jpeg" alt="Riley Meehan">
               </div>
               <h3 class="member-name">Riley Meehan</h3>
-              <p class="role">in situ Zine Faculty Advisor, Makerspace Director</p>
+              <p class="role"><em>in situ</em> Zine Faculty Advisor, Makerspace Director</p>
               <button class="learn-more-btn" aria-expanded="false">Learn More</button>
               <div class="member-details" hidden>
                 <p class="bio">Riley is an engineer, maker, designer, and educator whose research focuses on how educational institutions design and assess makerspaces to reflect the commitments and values of school communities. His work spans education, engineering, design, and sociology, with particular emphasis on creating inclusive and accessible maker learning environments.</p>
@@ -427,8 +434,8 @@
       <!-- Support Section -->
       <section id="support" class="support-section">
         <div class="container">
-          <h2 class="section-title">Support in situ</h2>
-          <p class="section-subtitle">Loving in situ? Consider supporting us here:</p>
+          <h2 class="section-title">Support <em>in situ</em></h2>
+          <p class="section-subtitle">Loving <em>in situ</em>? Consider supporting us here:</p>
           <div class="support-tiers">
             <div class="tier-card tier-supporter">
               <div class="tier-badge">SUPPORTER</div>
@@ -443,7 +450,7 @@
               <div class="tier-badge">DONATE</div>
               <div class="tier-price">Any Amount</div>
               <ul class="tier-perks">
-                <li>Support in situ and help us keep creativity alive at SIO!</li>
+                <li>Support <em>in situ</em> and help us keep creativity alive at SIO!</li>
               </ul>
               <a href="https://account.venmo.com/u/SIOinsituzine" target="_blank" rel="noopener" class="btn btn-tier btn-donate-alt">Donate Now</a>
             </div>
@@ -518,15 +525,17 @@
       <section id="artwork" class="artwork-section">
         <div class="container">
           <h2 class="section-title">Artwork</h2>
-          <p class="section-subtitle">All works featured across in situ issues</p>
-          <p class="artwork-intro">Below is a curated index of every artwork that has been submitted and accepted into in situ — including title, contributing artist, and a short description of the piece.</p>
+          <p class="section-subtitle">All works featured across <em>in situ</em> issues</p>
+          <p class="artwork-intro">Below is a curated index of every artwork that has been submitted and accepted into <em>in situ</em> — including title, contributing artist, and a short description of the piece.</p>
           <div class="artwork-tabs">
             <div class="artwork-tab-nav" role="tablist">
               <button class="artwork-tab-btn active" role="tab" aria-selected="true" aria-controls="tab-2026" id="btn-2026">2026</button>
               <button class="artwork-tab-btn" role="tab" aria-selected="false" aria-controls="tab-2025" id="btn-2025">2025</button>
             </div>
             <div class="artwork-tab-panel" id="tab-2025" role="tabpanel" aria-labelledby="btn-2025">
-              <div class="artwork-table-wrapper">
+              <details class="artwork-details">
+                <summary>Click here to see our artists' pieces and their descriptions</summary>
+                <div class="artwork-table-wrapper">
                 <table class="artwork-table">
                   <thead>
                     <tr>
@@ -629,10 +638,13 @@
                 <tr><td>Xiaoyu Zou</td><td>Sunbath at La Jolla</td><td>This painting captures a serene and memorable moment from my first visit to La Jolla Cove six years ago, inspired by the graceful presence of a sea lion basking in the sun. The warm yellow tones dominate the canvas, evoking the brightness of the sunlight and the warmth of the day. The sea lion is portrayed in a relaxed pose, its form elegantly blending into the golden surroundings. I painted it as an assignment for my oil painting class, and the original piece is preserved in my home in China.</td></tr>
                   </tbody>
                 </table>
-              </div>
+                </div>
+              </details>
             </div>
             <div class="artwork-tab-panel active" id="tab-2026" role="tabpanel" aria-labelledby="btn-2026">
-              <div class="artwork-table-wrapper">
+              <details class="artwork-details" open>
+                <summary>Click here to see our artists' pieces and their descriptions</summary>
+                <div class="artwork-table-wrapper">
                 <table class="artwork-table">
                   <thead>
                     <tr>
@@ -739,7 +751,8 @@ The lotus sits serene upon the water&#x27;s surface, roots unseen but nourished 
                 <tr><td>Wesley Sparagon</td><td>splish splash</td><td>Photograph of field technician diving in to the waters of Kāne‘ohe Bay,  Oʻahu, Hawaii. Digital Scans of photograph taken on 35mm Kodak Tri-X 100 film.</td></tr>
                   </tbody>
                 </table>
-              </div>
+                </div>
+              </details>
             </div>
           </div>
         </div>
@@ -753,7 +766,7 @@ The lotus sits serene upon the water&#x27;s surface, roots unseen but nourished 
               <span class="connect-icon" style="font-size:20px;vertical-align:middle;margin-right:8px;">📅</span>Zine Calendar
             </a>
             <a href="https://www.facebook.com/people/SIO-in-situ-Zine/61587147894914/" target="_blank" rel="noopener" class="connect-link">
-              <span class="connect-icon" style="font-size:20px;vertical-align:middle;margin-right:8px;">📘</span>Facebook: SIO in situ Zine
+              <span class="connect-icon" style="font-size:20px;vertical-align:middle;margin-right:8px;">📘</span>Facebook: SIO <em>in situ</em> Zine
             </a>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfrX2oJqzWIY8UEQIGDNzjcdxweD1IX2rW0BcbVrkja2yO-Dg/viewform?usp=send_form" target="_blank" rel="noopener" class="connect-link">
               <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Slack_Icon.png" alt="Slack" class="connect-icon" style="width:32px;height:32px;vertical-align:middle;margin-right:8px;">Join our Slack
