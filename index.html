@@ -132,6 +132,9 @@
     /* v02 zine section — treasure chest */
     .v02-zine-section { padding: 5rem 0; background: #f5f5f0; }
     .v02-coming-soon { text-align: center; font-size: 1.4rem; color: #888; letter-spacing: 0.06em; margin-top: 2rem; }
+    .sneak-peek-block { max-width: 720px; margin: 2rem auto 0; text-align: center; }
+    .sneak-peek-block p { font-size: 0.95rem; color: #666; margin-bottom: 1rem; }
+    .sneak-peek-video { width: 100%; border-radius: 8px; box-shadow: 0 10px 32px rgba(0,0,0,0.18); display: block; }
     .treasure-chest-block { max-width: 680px; margin: 2rem auto 0; text-align: center; }
     .chest-img { width: 220px; cursor: pointer; transition: transform 180ms ease; display: block; margin: 0 auto; image-rendering: pixelated; }
     .chest-img:hover { transform: scale(1.06); }
@@ -203,7 +206,7 @@
     <div class="hero-content">
       <h1 class="hero-title">Countercurrents</h1>
       <p class="hero-subtitle">v02 Issue · June 2026</p>
-      <a href="#v02-zine" class="btn btn-hero">Read v02 Zine Now</a>
+      <a href="#artwork" class="btn btn-hero">Explore the Art in Volume 2</a>
     </div>
   </section>
 
@@ -501,6 +504,13 @@
           </div>
           -->
           <p class="v02-coming-soon">Coming Soon!</p>
+          <div class="sneak-peek-block">
+            <p>🎬 Sneak peek at what's inside</p>
+            <video class="sneak-peek-video" controls playsinline preload="metadata">
+              <source src="v02-sneak-peek.mov" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
         </div>
       </section>
 
@@ -512,10 +522,10 @@
           <p class="artwork-intro">Below is a curated index of every artwork that has been submitted and accepted into in situ — including title, contributing artist, and a short description of the piece.</p>
           <div class="artwork-tabs">
             <div class="artwork-tab-nav" role="tablist">
-              <button class="artwork-tab-btn active" role="tab" aria-selected="true" aria-controls="tab-2025" id="btn-2025">2025</button>
-              <button class="artwork-tab-btn" role="tab" aria-selected="false" aria-controls="tab-2026" id="btn-2026">2026</button>
+              <button class="artwork-tab-btn active" role="tab" aria-selected="true" aria-controls="tab-2026" id="btn-2026">2026</button>
+              <button class="artwork-tab-btn" role="tab" aria-selected="false" aria-controls="tab-2025" id="btn-2025">2025</button>
             </div>
-            <div class="artwork-tab-panel active" id="tab-2025" role="tabpanel" aria-labelledby="btn-2025">
+            <div class="artwork-tab-panel" id="tab-2025" role="tabpanel" aria-labelledby="btn-2025">
               <div class="artwork-table-wrapper">
                 <table class="artwork-table">
                   <thead>
@@ -621,7 +631,7 @@
                 </table>
               </div>
             </div>
-            <div class="artwork-tab-panel" id="tab-2026" role="tabpanel" aria-labelledby="btn-2026">
+            <div class="artwork-tab-panel active" id="tab-2026" role="tabpanel" aria-labelledby="btn-2026">
               <div class="artwork-table-wrapper">
                 <table class="artwork-table">
                   <thead>
