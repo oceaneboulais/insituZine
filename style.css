@@ -509,7 +509,7 @@ section {
 }
 
 .goals-list li::before {
-  content: '•';
+  content: '\2022';
   position: absolute;
   left: 0;
   color: var(--color-accent);
@@ -1007,7 +1007,7 @@ section {
 }
 
 .tier-perks li::before {
-  content: '✓';
+  content: '\2713';
   position: absolute;
   left: 0;
   color: #28a745;
