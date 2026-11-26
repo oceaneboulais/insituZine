@@ -168,6 +168,15 @@
     .artwork-details[open] summary::before { transform: rotate(90deg); }
     .artwork-details summary:hover { background: #333; }
     .artwork-details .artwork-table-wrapper { margin-top: 1rem; }
+    .artwork-search { max-width: 460px; margin: 0 auto 1.5rem; text-align: center; }
+    .artwork-search input { width: 100%; padding: 0.7rem 1rem; border: 2px solid #ccc; border-radius: 6px; font-size: 1rem; }
+    .artwork-search input:focus { outline: none; border-color: #1a1a1a; }
+    .artwork-search-status { min-height: 1.3em; margin-top: 0.5rem; font-size: 0.9rem; color: #666; }
+    .artwork-tabs.searching .artwork-tab-nav { display: none; }
+    .artwork-tabs.searching .artwork-tab-panel { display: block; }
+    .artwork-tabs.searching .artwork-tab-panel[hidden] { display: none; }
+    .artwork-panel-label { display: none; font-weight: 700; margin: 1.5rem 0 0.5rem; color: #1a1a1a; }
+    .artwork-tabs.searching .artwork-panel-label { display: block; }
   </style>
 </head>
 <body>
@@ -502,12 +511,17 @@
           <h2 class="section-title">Artwork</h2>
           <p class="section-subtitle">All works featured across <em>in situ</em> issues</p>
           <p class="artwork-intro">Below is a curated index of every artwork that has been submitted and accepted into <em>in situ</em> &#x2014; including title, contributing artist, and a short description of the piece.</p>
+          <div class="artwork-search">
+            <input type="search" id="artwork-search-input" placeholder="Search by artist first or last name" aria-label="Search artworks by artist name" autocomplete="off">
+            <p class="artwork-search-status" id="artwork-search-status" aria-live="polite"></p>
+          </div>
           <div class="artwork-tabs">
             <div class="artwork-tab-nav" role="tablist">
               <button class="artwork-tab-btn active" role="tab" aria-selected="true" aria-controls="tab-2026" id="btn-2026">2026 &#x2014; Countercurrents</button>
               <button class="artwork-tab-btn" role="tab" aria-selected="false" aria-controls="tab-2025" id="btn-2025">2025 &#x2014; Seas of Change</button>
             </div>
             <div class="artwork-tab-panel" id="tab-2025" role="tabpanel" aria-labelledby="btn-2025">
+              <p class="artwork-panel-label">2025 &#x2014; Seas of Change</p>
               <details class="artwork-details">
                 <summary>Click here to see our artists' pieces and their descriptions</summary>
                 <div class="artwork-table-wrapper">
@@ -617,6 +631,7 @@
               </details>
             </div>
             <div class="artwork-tab-panel active" id="tab-2026" role="tabpanel" aria-labelledby="btn-2026">
+              <p class="artwork-panel-label">2026 &#x2014; Countercurrents</p>
               <details class="artwork-details">
                 <summary>Click here to see our artists' pieces and their descriptions</summary>
                 <div class="artwork-table-wrapper">
@@ -1050,6 +1065,41 @@ The lotus sits serene upon the water&#x27;s surface, roots unseen but nourished 
         });
       });
       // No member is opened by default
+
+      // -- Artwork search ----------------------------------------------------
+      (function initArtworkSearch() {
+        const input = document.getElementById('artwork-search-input');
+        const status = document.getElementById('artwork-search-status');
+        const tabs = document.querySelector('.artwork-tabs');
+        if (!input || !tabs) return;
+        const norm = function(t) { return t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); };
+        const panels = tabs.querySelectorAll('.artwork-tab-panel');
+        input.addEventListener('input', function() {
+          const q = norm(input.value.trim());
+          const terms = q ? q.split(/\s+/) : [];
+          let total = 0;
+          tabs.classList.toggle('searching', terms.length > 0);
+          panels.forEach(function(panel) {
+            let shown = 0;
+            panel.querySelectorAll('tbody tr').forEach(function(row) {
+              const name = norm(row.cells[0].textContent);
+              const match = terms.every(function(t) { return name.indexOf(t) !== -1; });
+              row.hidden = !match;
+              if (match) shown++;
+            });
+            const details = panel.querySelector('details');
+            if (terms.length) {
+              panel.hidden = shown === 0;
+              if (details && shown) details.open = true;
+            } else {
+              panel.hidden = false;
+              if (details) details.open = false;
+            }
+            total += shown;
+          });
+          status.textContent = terms.length ? (total ? total + (total === 1 ? ' artwork found' : ' artworks found') : 'No artists found') : '';
+        });
+      })();
 
       // -- Artwork tabs ------------------------------------------------------
       document.querySelectorAll('.artwork-tab-btn').forEach(function(btn) {
